@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:lachancla/screens/add_events_page.dart';
 
 class EventsPage extends StatelessWidget {
   const EventsPage({super.key});
@@ -65,6 +66,16 @@ class EventsPage extends StatelessWidget {
             ),
           ],
         ),
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => AddEventsPage()),
+          );
+        },
+        backgroundColor: Colors.black,
+        child: Icon(Icons.add),
       ),
     );
   }
