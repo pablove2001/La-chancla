@@ -4,6 +4,9 @@ class AddEventsPage extends StatelessWidget {
   TextEditingController titleController = TextEditingController();
   TextEditingController descriptionController = TextEditingController();
 
+  String dropdownvalue = 'Location...';
+  double currentSliderValue = 20;
+
   AddEventsPage({super.key});
 
   @override
@@ -23,6 +26,28 @@ class AddEventsPage extends StatelessWidget {
               child: Form(
                 child: Column(
                   children: [
+                    Container(
+                      width: 200,
+                      height: 50,
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(30),
+                        color: Colors.green,
+                      ),
+                      child: TextButton.icon(
+                        onPressed: () {},
+                        icon: Icon(
+                          Icons.upload,
+                          color: Colors.black,
+                        ),
+                        label: Text(
+                          "Upload image",
+                          style: TextStyle(fontSize: 18, color: Colors.black),
+                        ),
+                      ),
+                    ),
+                    SizedBox(
+                      height: 20,
+                    ),
                     TextFormField(
                       controller: titleController,
                       decoration: const InputDecoration(
@@ -46,42 +71,32 @@ class AddEventsPage extends StatelessWidget {
                     SizedBox(
                       height: 20,
                     ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceAround,
-                      children: [
-                        Container(
-                          height: 50,
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(30),
-                            color: Colors.green,
+                    DropdownButton<String>(
+                      isExpanded: true,
+                      value: dropdownvalue, // change this value
+                      items: <String>['Location...', 'A', 'B', 'C', 'D']
+                          .map((String value) {
+                        return DropdownMenuItem<String>(
+                          value: value,
+                          child: Text(
+                            value,
+                            style: TextStyle(fontSize: 18, color: Colors.black),
                           ),
-                          child: TextButton(
-                            onPressed: () {
-                              Navigator.pop(context);
-                            },
-                            child: Text(
-                              "upload image",
-                              style:
-                                  TextStyle(fontSize: 18, color: Colors.white),
-                            ),
-                          ),
-                        ),
-                        DropdownButton<String>(
-                          items:
-                              <String>['A', 'B', 'C', 'D'].map((String value) {
-                            return DropdownMenuItem<String>(
-                              value: value, // change this value
-                              child: Text(
-                                value,
-                                style: TextStyle(
-                                    fontSize: 18, color: Colors.black),
-                              ),
-                            );
-                          }).toList(),
-                          onChanged: (_) {},
-                        )
-                      ],
+                        );
+                      }).toList(),
+                      onChanged: (_) {},
                     ),
+                    SizedBox(
+                      height: 20,
+                    ),
+                    Text("Capacity:"),
+                    Slider(
+                      value: currentSliderValue,
+                      max: 100,
+                      divisions: 5,
+                      label: currentSliderValue.round().toString(),
+                      onChanged: (_) {},
+                    )
                   ],
                 ),
               ),
@@ -114,13 +129,7 @@ class AddEventsPage extends StatelessWidget {
                     color: Colors.blue,
                   ),
                   child: TextButton(
-                    onPressed: () {
-                      ScaffoldMessenger.of(context).showSnackBar(
-                        SnackBar(
-                          content: Text("Event created"),
-                        ),
-                      );
-                    },
+                    onPressed: () {},
                     child: Text(
                       "Submit",
                       style: TextStyle(fontSize: 24, color: Colors.white),
