@@ -13,7 +13,7 @@ class EventsPage extends StatefulWidget {
 
 class _EventsPageState extends State<EventsPage> {
   int _currentPageIndex = 0;
-  final _pagesName = ["Recommended", "Events", "Profile"];
+  final _pagesName = ["Home", "Events", "Profile"];
   final _pagesList = [RecommendedEvents(), Events(), Profile()];
 
   @override

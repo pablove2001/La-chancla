@@ -11,7 +11,7 @@ class EventDetailsPage extends StatelessWidget {
         title: Text("Event details"),
       ),
       body: Center(
-        child: Text("dasdasdasd"),
+        child: Text("Event details page"),
       ),
     );
   }

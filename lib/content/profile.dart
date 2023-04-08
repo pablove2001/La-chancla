@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import '../widgets/favorites_cards.dart';
+
+import '../widgets/my_events_cards.dart';
 
 class Profile extends StatefulWidget {
   Profile({super.key});
@@ -74,40 +77,7 @@ class _ProfileState extends State<Profile> with TickerProviderStateMixin {
                     padding: EdgeInsets.all(10),
                     itemCount: 3,
                     itemBuilder: (BuildContext context, int index) {
-                      return Card(
-                        clipBehavior: Clip.antiAlias,
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(15.0),
-                        ),
-                        child: Column(
-                          children: [
-                            ListTile(
-                              leading: Image.network(
-                                "https://knightsbanner.com/wp-content/uploads/2018/02/The_Greatest_Showman-copy-900x400.png",
-                              ),
-                              title: Text('Melbourne Cricket Stadium'),
-                              subtitle: Text('Australia'),
-                            ),
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.end,
-                              children: [
-                                MaterialButton(
-                                  child: Icon(
-                                    Icons.edit,
-                                  ),
-                                  onPressed: () {},
-                                ),
-                                MaterialButton(
-                                  child: Icon(
-                                    Icons.delete,
-                                  ),
-                                  onPressed: () {},
-                                ),
-                              ],
-                            )
-                          ],
-                        ),
-                      );
+                      return MyEventsCards();
                     },
                   ),
                   ListView.builder(
@@ -115,25 +85,7 @@ class _ProfileState extends State<Profile> with TickerProviderStateMixin {
                     padding: EdgeInsets.all(10),
                     itemCount: 2,
                     itemBuilder: (BuildContext context, int index) {
-                      return Card(
-                        clipBehavior: Clip.antiAlias,
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(15.0),
-                        ),
-                        child: ListTile(
-                          leading: Image.network(
-                            "https://i.stack.imgur.com/Of2w5.jpg",
-                          ),
-                          title: Text('Melbourne Cricket Stadium'),
-                          subtitle: Text('Australia'),
-                          trailing: MaterialButton(
-                            child: Icon(
-                              Icons.favorite,
-                            ),
-                            onPressed: () {},
-                          ),
-                        ),
-                      );
+                      return FavoritesCards();
                     },
                   ),
                 ],
