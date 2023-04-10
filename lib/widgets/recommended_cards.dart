@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:lachancla/models/events_model.dart';
 import 'package:lachancla/screens/event_details_page.dart';
 
 class RecommendedCards extends StatelessWidget {
-  const RecommendedCards({super.key});
+  final EventsModel event;
+  const RecommendedCards({super.key, required this.event});
 
   @override
   Widget build(BuildContext context) {
@@ -10,7 +12,9 @@ class RecommendedCards extends StatelessWidget {
       onTap: () {
         Navigator.of(context).push(
           MaterialPageRoute(
-            builder: (context) => EventDetailsPage(),
+            builder: (context) => EventDetailsPage(
+              event: event,
+            ),
           ),
         );
       },
@@ -28,7 +32,7 @@ class RecommendedCards extends StatelessWidget {
                 topLeft: Radius.circular(20),
               ),
               child: Image.network(
-                "https://knightsbanner.com/wp-content/uploads/2018/02/The_Greatest_Showman-copy-900x400.png",
+                "${event.images[0]}",
                 height: 100,
                 fit: BoxFit.cover,
                 width: double.infinity,
@@ -37,12 +41,12 @@ class RecommendedCards extends StatelessWidget {
             ListTile(
               title: Center(
                 child: Text(
-                  "The greatest Shownman",
+                  "${event.title}",
                 ),
               ),
               subtitle: Center(
                 child: Text(
-                  "The greatest Shownman",
+                  "${event.date}",
                   style: TextStyle(color: Colors.grey),
                 ),
               ),

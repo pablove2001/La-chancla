@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:lachancla/providers/recommended_events_provider.dart';
 import '../widgets/recommended_cards.dart';
 
 class RecommendedEvents extends StatelessWidget {
@@ -37,12 +39,17 @@ class RecommendedEvents extends StatelessWidget {
             Expanded(
               child: GridView.builder(
                 scrollDirection: Axis.vertical,
-                itemCount: 10,
+                itemCount:
+                    context.watch<RecommendedEventsProvider>().getEvents.length,
                 gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                   crossAxisCount: 2,
                 ),
                 itemBuilder: (BuildContext context, int index) {
-                  return RecommendedCards();
+                  return RecommendedCards(
+                    event: context
+                        .read<RecommendedEventsProvider>()
+                        .getEvents[index],
+                  );
                 },
               ),
             ),
