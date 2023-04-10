@@ -1,35 +1,28 @@
 import 'package:flutter/material.dart';
+import 'package:lachancla/providers/events_page_provider.dart';
 import 'package:lachancla/screens/add_events_page.dart';
+import 'package:provider/provider.dart';
 import '../content/events.dart';
 import '../content/profile.dart';
 import '../content/recommended_events.dart';
 
-class EventsPage extends StatefulWidget {
-  const EventsPage({super.key});
-
-  @override
-  State<EventsPage> createState() => _EventsPageState();
-}
-
-class _EventsPageState extends State<EventsPage> {
-  int _currentPageIndex = 0;
+class EventsPage extends StatelessWidget {
   final _pagesName = ["Home", "Events", "Profile"];
   final _pagesList = [RecommendedEvents(), Events(), Profile()];
+  EventsPage({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Color.fromRGBO(238, 216, 187, 1),
       body: IndexedStack(
-        index: _currentPageIndex,
+        index: context.read<EventsPageProvider>().getCurrentPageIndex,
         children: _pagesList,
       ),
       bottomNavigationBar: NavigationBar(
-        selectedIndex: _currentPageIndex,
+        selectedIndex: context.watch<EventsPageProvider>().getCurrentPageIndex,
         onDestinationSelected: (value) {
-          setState(() {
-            _currentPageIndex = value;
-          });
+          context.read<EventsPageProvider>().setCurrentPageIndex(value);
         },
         destinations: [
           NavigationDestination(
