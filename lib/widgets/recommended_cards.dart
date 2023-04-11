@@ -46,7 +46,7 @@ class RecommendedCards extends StatelessWidget {
               ),
               subtitle: Center(
                 child: Text(
-                  "${event.date}",
+                  "${event.startDate}",
                   style: TextStyle(color: Colors.grey),
                 ),
               ),
