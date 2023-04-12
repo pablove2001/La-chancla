@@ -13,7 +13,7 @@ class RecommendedEventsProvider with ChangeNotifier {
             ],
             startDate: DateTime(2023, 12, 29, 13),
             endDate: DateTime(2023, 12, 29, 18),
-            eventPlace: 'ITESO',
+            place: 'ITESO',
             capacity: 100,
             capacityNotAvailable: 20,
             id_organizer: 'asdf1234',

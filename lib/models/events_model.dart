@@ -5,7 +5,7 @@ class EventsModel {
   final List<String> images;
   final DateTime startDate;
   final DateTime endDate;
-  final String eventPlace;
+  final String place;
   final int capacity;
   final int capacityNotAvailable;
   final String id_organizer; // Event owner
@@ -28,7 +28,7 @@ class EventsModel {
     required this.images,
     required this.startDate,
     required this.endDate,
-    required this.eventPlace,
+    required this.place,
     required this.capacity,
     required this.capacityNotAvailable,
     required this.id_organizer,

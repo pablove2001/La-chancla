@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:lachancla/providers/event_details_provider.dart';
 import 'package:lachancla/providers/events_page_provider.dart';
 import 'package:lachancla/providers/recommended_events_provider.dart';
 import 'package:lachancla/screens/home_page.dart';
@@ -10,6 +11,7 @@ void main() {
       providers: [
         ChangeNotifierProvider(create: (_) => RecommendedEventsProvider()),
         ChangeNotifierProvider(create: (_) => EventsPageProvider()),
+        ChangeNotifierProvider(create: (_) => EventDetailsProvider()),
       ],
       child: MyApp(),
     ),
