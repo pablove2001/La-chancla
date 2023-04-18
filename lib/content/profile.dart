@@ -16,7 +16,6 @@ class _ProfileState extends State<Profile> with TickerProviderStateMixin {
     TabController _tabController = TabController(length: 2, vsync: this);
 
     return Scaffold(
-      backgroundColor: Color.fromRGBO(238, 216, 187, 1),
       body: SafeArea(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -55,7 +54,7 @@ class _ProfileState extends State<Profile> with TickerProviderStateMixin {
                 alignment: Alignment.centerLeft,
                 child: TabBar(
                   controller: _tabController,
-                  labelColor: Colors.black,
+                  indicatorColor: Colors.white,
                   unselectedLabelColor: Colors.grey,
                   tabs: [
                     Tab(

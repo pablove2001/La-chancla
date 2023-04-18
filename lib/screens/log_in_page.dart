@@ -13,7 +13,6 @@ class LogInPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color.fromRGBO(238, 216, 187, 1),
       body: SafeArea(
         child: Padding(
           padding: const EdgeInsets.only(left: 30, right: 30),
@@ -119,7 +118,7 @@ class LogInPage extends StatelessWidget {
                     flex: 1,
                     child: Container(
                       height: 1,
-                      color: Color.fromARGB(255, 0, 0, 0),
+                      color: Colors.white,
                       margin: EdgeInsets.symmetric(vertical: 10),
                     ),
                   ),
@@ -134,7 +133,7 @@ class LogInPage extends StatelessWidget {
                     flex: 1,
                     child: Container(
                       height: 1,
-                      color: Color.fromARGB(255, 0, 0, 0),
+                      color: Colors.white,
                       margin: EdgeInsets.symmetric(vertical: 10),
                     ),
                   ),

@@ -8,7 +8,6 @@ class StartingPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color.fromRGBO(238, 216, 187, 1),
       /*appBar: AppBar(
         title: Text('Material App Bar'),
       ),*/
@@ -25,10 +24,7 @@ class StartingPage extends StatelessWidget {
                   children: [
                     Text(
                       "Hola Mariana",
-                      style: TextStyle(
-                          fontFamily: 'Lobster',
-                          fontSize: 36,
-                          color: Colors.black),
+                      style: TextStyle(fontFamily: 'Lobster', fontSize: 36),
                     ),
                     Text(
                       "¡Comencemos!",
@@ -74,7 +70,7 @@ class StartingPage extends StatelessWidget {
                   ],
                   onChange: (allSelectedItems, selectedItem) {}),
               MaterialButton(
-                color: Colors.blue[100],
+                color: Colors.blue,
                 child: Text("Comenzar"),
                 onPressed: () {
                   Navigator.of(context).push(

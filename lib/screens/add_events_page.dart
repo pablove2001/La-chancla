@@ -12,14 +12,12 @@ class AddEventsPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color.fromRGBO(238, 216, 187, 1),
       body: SafeArea(
         child: Column(
           children: [
             Text(
               "Crear Evento",
-              style: TextStyle(
-                  fontFamily: 'Lobster', fontSize: 36, color: Colors.black),
+              style: TextStyle(fontFamily: 'Lobster', fontSize: 36),
             ),
             Padding(
               padding: const EdgeInsets.all(30.0),
@@ -80,7 +78,7 @@ class AddEventsPage extends StatelessWidget {
                           value: value,
                           child: Text(
                             value,
-                            style: TextStyle(fontSize: 18, color: Colors.black),
+                            style: TextStyle(fontSize: 18),
                           ),
                         );
                       }).toList(),
