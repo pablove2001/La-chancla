@@ -16,7 +16,6 @@ class EventDetailsPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color.fromRGBO(238, 216, 187, 1),
       appBar: AppBar(
         title: Text("${event.title}"),
         actions: [

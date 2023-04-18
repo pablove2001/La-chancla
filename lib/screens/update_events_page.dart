@@ -6,14 +6,12 @@ class UpdateEventsPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color.fromRGBO(238, 216, 187, 1),
       body: SafeArea(
         child: Column(
           children: [
             Text(
               "Actualizar Evento",
-              style: TextStyle(
-                  fontFamily: 'Lobster', fontSize: 36, color: Colors.black),
+              style: TextStyle(fontFamily: 'Lobster', fontSize: 36),
             ),
             Padding(
               padding: const EdgeInsets.all(30.0),
