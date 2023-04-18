@@ -23,7 +23,7 @@ class RecommendedEvents extends StatelessWidget {
                       style: TextStyle(
                           fontFamily: 'Lobster',
                           fontSize: 36,
-                          color: Colors.black),
+                          color: Colors.white),
                     ),
                     Padding(
                       padding: const EdgeInsets.only(left: 20),
