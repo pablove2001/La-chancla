@@ -9,7 +9,6 @@ class RecommendedEvents extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color.fromRGBO(238, 216, 187, 1),
       body: SafeArea(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -18,8 +17,7 @@ class RecommendedEvents extends StatelessWidget {
               children: [
                 Text(
                   "Hola Mariana",
-                  style: TextStyle(
-                      fontFamily: 'Lobster', fontSize: 36, color: Colors.black),
+                  style: TextStyle(fontFamily: 'Lobster', fontSize: 36),
                 ),
                 Padding(
                   padding: const EdgeInsets.only(left: 20),
