@@ -8,7 +8,7 @@ class RecommendedEventsProvider with ChangeNotifier {
             title: 'title',
             description: 'description',
             images: [
-              'https://user-images.githubusercontent.com/52970365/231310553-ba0c1ae5-360b-4b39-b6b8-73d84d5c3ee0.png',
+              'https://i.waifu.pics/WGTA1vN.png',
               'https://wallpapercave.com/wp/wp7490649.jpg',
             ],
             startDate: DateTime(2023, 12, 29, 13),

@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
+import 'package:lachancla/providers/recommended_events_provider.dart';
+import 'package:provider/provider.dart';
+import '../screens/event_details_page.dart';
 
 class ExploreImages extends StatelessWidget {
   const ExploreImages({super.key});
@@ -21,15 +24,31 @@ class ExploreImages extends StatelessWidget {
         ),
         itemCount: 30,
         itemBuilder: (BuildContext context, int index) {
-          return Container(
-            decoration: BoxDecoration(
-              border: Border.all(
-                width: 1,
+          return GestureDetector(
+            onTap: () {
+              Navigator.of(context).push(
+                MaterialPageRoute(
+                  builder: (context) => EventDetailsPage(
+                    event: context
+                        .read<RecommendedEventsProvider>()
+                        .getEvents[index],
+                  ),
+                ),
+              );
+            },
+            child: Container(
+              decoration: BoxDecoration(
+                border: Border.all(
+                  width: 1,
+                ),
               ),
-            ),
-            child: Image.network(
-              "https://i.waifu.pics/WGTA1vN.png",
-              fit: BoxFit.cover,
+              child: Image.network(
+                context
+                    .read<RecommendedEventsProvider>()
+                    .getEvents[index]
+                    .images[0],
+                fit: BoxFit.cover,
+              ),
             ),
           );
         },
