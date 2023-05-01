@@ -32,7 +32,7 @@ class RecommendedCards extends StatelessWidget {
                 topLeft: Radius.circular(20),
               ),
               child: Image.network(
-                "${event.images[0]}",
+                "${event.image}",
                 height: 100,
                 fit: BoxFit.cover,
                 width: double.infinity,

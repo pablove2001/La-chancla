@@ -30,56 +30,23 @@ class EventDetailsPage extends StatelessWidget {
           SizedBox(
             height: 10,
           ),
-          CarouselSlider(
-            items: event.images
-                .map((item) => ImageCourselSLider(
-                      item: item,
-                    ))
-                .toList(),
-            carouselController: _controller,
-            options: CarouselOptions(
-                autoPlay: false,
-                enlargeCenterPage: true,
-                enableInfiniteScroll: false,
-                aspectRatio: 2.0,
-                onPageChanged: (index, reason) {
-                  context
-                      .read<EventDetailsProvider>()
-                      .setCurrentPageIndex(index);
-                }),
-          ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: event.images.asMap().entries.map(
-              (entry) {
-                return GestureDetector(
-                  onTap: () => _controller.animateToPage(entry.key),
-                  child: Container(
-                    width: 12.0,
-                    height: 12.0,
-                    margin:
-                        EdgeInsets.symmetric(vertical: 8.0, horizontal: 4.0),
-                    decoration: BoxDecoration(
-                        shape: BoxShape.circle,
-                        color: (Theme.of(context).brightness == Brightness.dark
-                                ? Colors.white
-                                : Colors.black)
-                            .withOpacity(context
-                                        .watch<EventDetailsProvider>()
-                                        .getCurrentPageIndex ==
-                                    entry.key
-                                ? 0.9
-                                : 0.4)),
-                  ),
-                );
-              },
-            ).toList(),
-          ),
+
+          // aqui va a ir la imagen
+
           Padding(
             padding: EdgeInsets.all(10.0),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
+                Container(
+                  height: 300.0,
+                  width: double.infinity,
+                  child: Image.network(
+                    '${event.image}',
+                    fit: BoxFit.cover,
+                  ),
+                ),
+                SizedBox(height: 25),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: [
@@ -128,18 +95,11 @@ class EventDetailsPage extends StatelessWidget {
                           'Capacity:',
                           style: TextStyle(fontSize: 24),
                         ),
-                        Text(
-                            "${event.capacityNotAvailable} / ${event.capacity}"),
+                        Text("${event.capacity}"),
                       ],
                     ),
                   ],
                 ),
-                SizedBox(height: 25),
-                Text(
-                  'Recomendations:',
-                  style: TextStyle(fontSize: 24),
-                ),
-                Text(event.recommendations),
                 SizedBox(height: 25),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -150,7 +110,7 @@ class EventDetailsPage extends StatelessWidget {
                           'Place:',
                           style: TextStyle(fontSize: 24),
                         ),
-                        Text(event.place),
+                        Text(event.urlMaps),
                       ],
                     ),
                     Column(
@@ -166,10 +126,10 @@ class EventDetailsPage extends StatelessWidget {
                 ),
                 SizedBox(height: 25),
                 Text(
-                  'Language:',
+                  'Estado:',
                   style: TextStyle(fontSize: 24),
                 ),
-                Text(event.language),
+                Text("${event.state_name}"),
               ],
             ),
           )
