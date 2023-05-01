@@ -46,7 +46,7 @@ class ExploreImages extends StatelessWidget {
                 context
                     .read<RecommendedEventsProvider>()
                     .getEvents[index]
-                    .images[0],
+                    .image,
                 fit: BoxFit.cover,
               ),
             ),
