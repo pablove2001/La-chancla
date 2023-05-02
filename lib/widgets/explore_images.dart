@@ -22,7 +22,7 @@ class ExploreImages extends StatelessWidget {
             QuiltedGridTile(1, 1),
           ],
         ),
-        itemCount: 30,
+        itemCount: context.watch<RecommendedEventsProvider>().getEvents.length,
         itemBuilder: (BuildContext context, int index) {
           return GestureDetector(
             onTap: () {

@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:lachancla/models/events_model.dart';
 import 'package:lachancla/services/firebase_service.dart';
 
-class RecommendedEventsProvider with ChangeNotifier {
+class LogInProvider with ChangeNotifier {
   List<EventsModel> _events = List.generate(
       10,
       (index) => EventsModel(

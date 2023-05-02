@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "332914717990",
+    "project_id": "lachancla-flutter",
+    "storage_bucket": "lachancla-flutter.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:332914717990:android:cd4f2fe940a160d8d47de7",
+        "android_client_info": {
+          "package_name": "iteso.mx.lachancla"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "332914717990-3sri5kc7udj70dqene57g084pm61tghg.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyADtq8hpUdLPrwlXxKMXfrDo7SP8h5a1JA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "332914717990-3sri5kc7udj70dqene57g084pm61tghg.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
