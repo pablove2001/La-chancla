@@ -3,12 +3,15 @@ import 'package:flutter_signin_button/button_list.dart';
 import 'package:flutter_signin_button/button_view.dart';
 import 'package:lachancla/screens/log_in_page.dart';
 import 'package:lachancla/screens/starting_page.dart';
+import 'package:lachancla/services/authFunctions.dart';
 
 class SingUpPage extends StatelessWidget {
   TextEditingController fullNameController = TextEditingController();
   TextEditingController emailController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
   TextEditingController confirmPasswordController = TextEditingController();
+
+  bool logged = false;
 
   SingUpPage({super.key});
 
@@ -94,11 +97,46 @@ class SingUpPage extends StatelessWidget {
                   color: Colors.blue,
                 ),
                 child: TextButton(
-                  onPressed: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(builder: (context) => StartingPage()),
-                    );
+                  onPressed: () async {
+                    print(emailController.text);
+                    print(passwordController.text);
+                    print(confirmPasswordController.text);
+                    print(fullNameController.text);
+
+                    if (emailController.text == '' ||
+                        passwordController.text == '' ||
+                        confirmPasswordController.text == '' ||
+                        fullNameController.text == '') {
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        SnackBar(
+                          content: Text('Faltan campos por llenar'),
+                        ),
+                      );
+                      return;
+                    }
+
+                    if (passwordController.text !=
+                        confirmPasswordController.text) {
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        SnackBar(
+                          content: Text('Las contraseñas no son iguales'),
+                        ),
+                      );
+                      return;
+                    }
+
+                    logged = await AuthServices.signupUser(
+                        emailController.text,
+                        passwordController.text,
+                        fullNameController.text,
+                        context);
+
+                    if (logged) {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) => StartingPage()),
+                      );
+                    }
                   },
                   child: Text(
                     'Sign up',

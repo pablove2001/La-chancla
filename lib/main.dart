@@ -4,12 +4,22 @@ import 'package:lachancla/providers/events_page_provider.dart';
 import 'package:lachancla/providers/recommended_events_provider.dart';
 import 'package:lachancla/screens/home_page.dart';
 import 'package:provider/provider.dart';
+// firebase
+import 'package:firebase_core/firebase_core.dart';
+import 'firebase_options.dart';
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
   runApp(
     MultiProvider(
       providers: [
-        ChangeNotifierProvider(create: (_) => RecommendedEventsProvider()),
+        // ChangeNotifierProvider(create: (_) => RecommendedEventsProvider()),
+        ChangeNotifierProvider<RecommendedEventsProvider>.value(
+          value: RecommendedEventsProvider()..initProvider(),
+        ),
         ChangeNotifierProvider(create: (_) => EventsPageProvider()),
         ChangeNotifierProvider(create: (_) => EventDetailsProvider()),
       ],
