@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import '../widgets/explore_images.dart';
 import '../widgets/easter_egg.dart';
 
@@ -17,7 +18,7 @@ class Events extends StatelessWidget {
                 Column(
                   children: [
                     Text(
-                      "Hola Mariana",
+                      "Hola ${FirebaseAuth.instance.currentUser?.displayName ?? 'Sin Nombre'}",
                       style: TextStyle(
                           fontFamily: 'Lobster',
                           fontSize: 36,

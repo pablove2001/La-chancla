@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import '../widgets/favorites_cards.dart';
 
@@ -32,7 +33,7 @@ class _ProfileState extends State<Profile> with TickerProviderStateMixin {
                       ),
                     ),
                     title: Text(
-                      "Pablito",
+                      "${FirebaseAuth.instance.currentUser?.displayName ?? 'Sin Nombre'}",
                       style: TextStyle(
                         fontFamily: 'Lobster',
                         fontSize: 24,

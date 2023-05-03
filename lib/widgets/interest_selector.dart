@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_multi_select_items/flutter_multi_select_items.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 class InterestSelector extends StatelessWidget {
   InterestSelector({super.key});
@@ -23,7 +24,7 @@ class InterestSelector extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    "Hola Mariana",
+                    "Hola ${FirebaseAuth.instance.currentUser?.displayName ?? 'Sin Nombre'}",
                     style: TextStyle(fontFamily: 'Lobster', fontSize: 36),
                   ),
                   Text(

@@ -52,4 +52,12 @@ class AuthServices {
     }
     return false;
   }
+
+  static bool isAlreadyAuthenticated() {
+    return FirebaseAuth.instance.currentUser != null;
+  }
+
+  Future<void> signOutFirebaseUser() async {
+    await FirebaseAuth.instance.signOut();
+  }
 }

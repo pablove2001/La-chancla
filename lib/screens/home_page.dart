@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:lachancla/screens/log_in_page.dart';
 import 'package:lachancla/screens/sign_up_page.dart';
@@ -87,6 +88,30 @@ class HomePage extends StatelessWidget {
                     },
                     child: Text(
                       'Sign up',
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 20,
+                      ),
+                    ),
+                  ),
+                ),
+                SizedBox(
+                  height: 20,
+                ),
+                Container(
+                  width: 300,
+                  height: 50,
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(30),
+                    color: Colors.blue,
+                  ),
+                  child: TextButton(
+                    onPressed: () {
+                      print(
+                          '${FirebaseAuth.instance.currentUser?.displayName ?? 'Sin Nombre'}');
+                    },
+                    child: Text(
+                      'print',
                       style: TextStyle(
                         color: Colors.white,
                         fontSize: 20,
