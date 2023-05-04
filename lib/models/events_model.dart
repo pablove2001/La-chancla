@@ -16,9 +16,6 @@ class EventsModel {
   final int minimumAge;
   final int maximumAge;
 
-  // Not required
-  final DateTime creationDate = DateTime.now();
-
   EventsModel({
     // Required
     required this.title,
