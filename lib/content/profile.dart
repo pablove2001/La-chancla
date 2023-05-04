@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:lachancla/screens/log_in_page.dart';
+import 'package:lachancla/widgets/edit_avatar_modal.dart';
 import '../widgets/favorites_cards.dart';
-
+import 'package:firebase_auth/firebase_auth.dart';
 import '../widgets/my_events_cards.dart';
 
 class Profile extends StatefulWidget {
@@ -14,6 +16,20 @@ class _ProfileState extends State<Profile> with TickerProviderStateMixin {
   @override
   Widget build(BuildContext context) {
     TabController _tabController = TabController(length: 2, vsync: this);
+    final String profileImage =
+        "https://avatars.githubusercontent.com/u/52970365?v=4";
+    FirebaseAuth auth = FirebaseAuth.instance;
+
+    void mostrarModal(BuildContext context, String image) {
+      showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          return EditAvatarModal(
+            profileImage: profileImage,
+          );
+        },
+      );
+    }
 
     return Scaffold(
       body: SafeArea(
@@ -25,10 +41,15 @@ class _ProfileState extends State<Profile> with TickerProviderStateMixin {
                 Container(
                   margin: EdgeInsets.only(top: 10, left: 10, right: 10),
                   child: ListTile(
-                    leading: CircleAvatar(
-                      radius: 48,
-                      backgroundImage: NetworkImage(
-                        "https://avatars.githubusercontent.com/u/52970365?v=4",
+                    leading: GestureDetector(
+                      onTap: () {
+                        mostrarModal(context, profileImage);
+                      },
+                      child: CircleAvatar(
+                        radius: 48,
+                        backgroundImage: NetworkImage(
+                          profileImage,
+                        ),
                       ),
                     ),
                     title: Text(
@@ -44,6 +65,28 @@ class _ProfileState extends State<Profile> with TickerProviderStateMixin {
                         fontFamily: 'Lobster',
                         fontSize: 20,
                       ),
+                    ),
+                    trailing: MaterialButton(
+                      child: Column(children: [
+                        Icon(
+                          Icons.logout,
+                        ),
+                        Text(
+                          "Log out",
+                          style: TextStyle(
+                            fontSize: 12,
+                          ),
+                        ),
+                      ]),
+                      onPressed: () async {
+                        await auth.signOut();
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => LogInPage(),
+                          ),
+                        );
+                      },
                     ),
                   ),
                 ),
