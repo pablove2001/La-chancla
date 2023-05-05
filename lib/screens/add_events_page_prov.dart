@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:intl/intl.dart';
 import 'package:lachancla/providers/add_events_provider.dart';
+import 'package:lachancla/providers/states_builder_provider.dart';
+import 'package:lachancla/services/firebase_service.dart';
 import 'package:lachancla/widgets/states_builder.dart';
 import 'package:provider/provider.dart';
 
@@ -204,9 +206,15 @@ class AddEventsPageProv extends StatelessWidget {
                           color: Colors.blue,
                         ),
                         child: TextButton(
-                          onPressed: () {
-                            print("Submit" + DateTime.now().toString());
-                            context.read<AddEventsProvider>().printValues();
+                          onPressed: () async{
+                            // TODO: validar formulario
+
+
+                            String estado = context.read<StatesBuilderProvider>().getState() ?? 'Jalisco';
+                            bool nice = await context.read<AddEventsProvider>().submitForm(estado, context);
+                            if (nice) {
+                              
+                            }
                           },
                           child: Text(
                             "Submit",

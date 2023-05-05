@@ -39,7 +39,7 @@ class RecommendedEventsProvider with ChangeNotifier {
           urlMaps: event['urlMaps'],
           capacity: event['capacity'],
           id_organizer: event['id_organizer'],
-          status: event['status'],
+          status: 'Sin estatus',
         ),
       );
     }
