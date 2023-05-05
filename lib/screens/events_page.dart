@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:lachancla/providers/events_page_provider.dart';
 import 'package:lachancla/screens/add_events_page.dart';
+import 'package:lachancla/screens/add_events_page_prov.dart';
 import 'package:provider/provider.dart';
 import '../content/events.dart';
 import '../content/profile.dart';
@@ -52,7 +53,7 @@ class EventsPage extends StatelessWidget {
               onPressed: () {
                 Navigator.of(context).push(
                   MaterialPageRoute(
-                    builder: (context) => AddEventsPage(),
+                    builder: (context) => AddEventsPageProv(),
                   ),
                 );
               },
