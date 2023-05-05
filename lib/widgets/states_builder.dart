@@ -1,6 +1,8 @@
 import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
+import 'package:lachancla/providers/states_builder_provider.dart';
+import 'package:provider/provider.dart';
 
 class StatesBuilder extends StatefulWidget {
   const StatesBuilder({Key? key}) : super(key: key);
@@ -10,8 +12,6 @@ class StatesBuilder extends StatefulWidget {
 }
 
 class _StatesBuilderState extends State<StatesBuilder> {
-  String? _selectedState = 'Jalisco';
-
   Future<List<String>> _fetchStates() async {
     final response = await http.get(Uri.parse(
         'https://raw.githubusercontent.com/dantaex/ciudades_mexico/master/states_mexico.json'));
@@ -36,7 +36,7 @@ class _StatesBuilderState extends State<StatesBuilder> {
           if (snapshot.hasData) {
             final stateNames = snapshot.data!;
             return DropdownButton<String>(
-              value: _selectedState,
+              value: context.watch<StatesBuilderProvider>().selectedState,
               items: stateNames
                   .map((stateName) => DropdownMenuItem<String>(
                         value: stateName,
@@ -44,9 +44,7 @@ class _StatesBuilderState extends State<StatesBuilder> {
                       ))
                   .toList(),
               onChanged: (value) {
-                setState(() {
-                  _selectedState = value;
-                });
+                context.read<StatesBuilderProvider>().setState(value!);
               },
             );
           } else if (snapshot.hasError) {

@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:lachancla/screens/log_in_page.dart';
 import 'package:lachancla/widgets/edit_avatar_modal.dart';
+import 'package:provider/provider.dart';
+import '../providers/states_builder_provider.dart';
 import '../widgets/favorites_cards.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import '../widgets/my_events_cards.dart';
@@ -86,6 +88,7 @@ class _ProfileState extends State<Profile> with TickerProviderStateMixin {
                             builder: (context) => LogInPage(),
                           ),
                         );
+                        print(context.read<StatesBuilderProvider>().getState());
                       },
                     ),
                   ),
