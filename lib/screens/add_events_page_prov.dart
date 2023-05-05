@@ -12,8 +12,6 @@ class AddEventsPageProv extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    String estado = "Jalisco";
-
     return Scaffold(
       body: SafeArea(
         child: Column(
@@ -218,6 +216,7 @@ class AddEventsPageProv extends StatelessWidget {
                       ),
                     ],
                   ),
+                  SizedBox(height: 20,),
                 ],
               ),
             ),

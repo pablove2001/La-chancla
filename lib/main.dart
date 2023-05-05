@@ -4,6 +4,7 @@ import 'package:lachancla/providers/event_details_provider.dart';
 import 'package:lachancla/providers/events_page_provider.dart';
 import 'package:lachancla/providers/recommended_events_provider.dart';
 import 'package:lachancla/providers/states_builder_provider.dart';
+import 'package:lachancla/providers/stepper_provider.dart';
 import 'package:lachancla/screens/home_page.dart';
 import 'package:provider/provider.dart';
 // firebase
@@ -27,6 +28,7 @@ void main() async {
         ChangeNotifierProvider<AddEventsProvider>(
             create: (context) => AddEventsProvider()),
         ChangeNotifierProvider(create: (_) => StatesBuilderProvider()),
+        ChangeNotifierProvider(create: (_) => StepperProvider()),
       ],
       child: MyApp(),
     ),

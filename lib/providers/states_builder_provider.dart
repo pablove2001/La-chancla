@@ -5,6 +5,7 @@ class StatesBuilderProvider with ChangeNotifier {
 
   void setState(String? state) {
     selectedState = state;
+    print(selectedState);
     notifyListeners();
   }
 

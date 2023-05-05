@@ -125,6 +125,15 @@ class SingUpPage extends StatelessWidget {
                       return;
                     }
 
+                    if (passwordController.text.length < 6) {
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        SnackBar(
+                          content: Text('Contraseña debe ser mayor a 6 caracteres'),
+                        ),
+                      );
+                      return;
+                    }
+
                     logged = await AuthServices.signupUser(
                         emailController.text,
                         passwordController.text,

@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_multi_select_items/flutter_multi_select_items.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:lachancla/providers/stepper_provider.dart';
+import 'package:provider/provider.dart';
 
 class InterestSelector extends StatelessWidget {
   InterestSelector({super.key});
@@ -68,7 +70,9 @@ class InterestSelector extends StatelessWidget {
                 MultiSelectCard(value: 'PHP', label: 'PHP'),
                 MultiSelectCard(value: 'Kotlin', label: 'Kotlin'),
               ],
-              onChange: (allSelectedItems, selectedItem) {}),
+              onChange: (allSelectedItems, selectedItem) {
+                context.read<StepperProvider>().setGustos(allSelectedItems);
+              }),
         ],
       ),
     );

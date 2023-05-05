@@ -1,7 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:lachancla/providers/states_builder_provider.dart';
+import 'package:lachancla/providers/stepper_provider.dart';
 import 'package:lachancla/screens/events_page.dart';
 import 'package:lachancla/widgets/interest_selector.dart';
 import 'package:lachancla/widgets/states_builder.dart';
+import 'package:lachancla/services/firebase_service.dart';
+import 'package:provider/provider.dart';
 
 class UserStepper extends StatefulWidget {
   const UserStepper({super.key});
@@ -12,12 +16,16 @@ class UserStepper extends StatefulWidget {
 
 class _UserStepperState extends State<UserStepper> {
   int currentStep = 0;
-  continueStep() {
+  continueStep() async {
     if (currentStep < 1) {
       setState(() {
         currentStep += 1;
       });
     } else {
+      // actualizar datos 
+      await updateUserStepper(context.read<StepperProvider>().getGustos, context.read<StatesBuilderProvider>().getState() ?? 'Jalisco', context);
+
+      // ir a pagina de eventos
       Navigator.push(
         context,
         MaterialPageRoute(builder: (context) => EventsPage()),

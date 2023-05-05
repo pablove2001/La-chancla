@@ -8,9 +8,6 @@ class StartingPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Color.fromRGBO(238, 216, 187, 1),
-      /*appBar: AppBar(
-        title: Text('Material App Bar'),
-      ),*/
       body: UserStepper(),
     );
   }

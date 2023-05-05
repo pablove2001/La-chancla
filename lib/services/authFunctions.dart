@@ -19,7 +19,7 @@ class AuthServices {
       await FirestoreServices.saveUser(
           full_name, email, userCredential.user!.uid);
 
-      await FirebaseFirestore.instance.collection('users').doc(userCredential.user!.uid).update({'state_name':'Jalisco','favorite_events':[],'events_created':[], 'photoURL': 'https://user-images.githubusercontent.com/52970365/236108954-7cdd5f03-6539-4a32-82ba-afa96230d756.png'});
+      await FirebaseFirestore.instance.collection('users').doc(userCredential.user!.uid).update({'gustos':[],'state_name':'Jalisco','favorite_events':[],'events_created':[], 'photoURL': 'https://user-images.githubusercontent.com/52970365/236108954-7cdd5f03-6539-4a32-82ba-afa96230d756.png'});
       
       ScaffoldMessenger.of(context)
           .showSnackBar(SnackBar(content: Text('Registration Successful')));
