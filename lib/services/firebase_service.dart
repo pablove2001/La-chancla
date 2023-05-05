@@ -34,6 +34,7 @@ Future<bool> updateUserStepper(List<String> gustos, String estado, BuildContext 
 
     return true;
   } on FirebaseAuthException catch (e) {
+    print(e);
     ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('Error guardando datos stepper')));
   }
   return false;
@@ -59,11 +60,13 @@ Future<bool> createEventService(int capacity, String descritpion, DateTime start
     // se añade el nuevo evento
     data!['events_created'].add(eventoRef.id);
     // se sube los nuevos eventos del usuario
-    await FirebaseFirestore.instance.collection('users').doc(uid).update({'events_created':data!['events_created']});
+    await FirebaseFirestore.instance.collection('users').doc(uid).update({'events_created':data['events_created']});
 
     // todo bien retorna true
     return true;
-  } on FirebaseAuthException catch (e) {}
+  } on FirebaseAuthException catch (e) {
+    print(e);
+  }
   // mal retorna false
   return false;
 }

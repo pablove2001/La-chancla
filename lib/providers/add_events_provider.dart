@@ -2,9 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:lachancla/providers/states_builder_provider.dart';
 import 'package:lachancla/screens/events_page.dart';
-import 'package:lachancla/screens/starting_page.dart';
 import 'package:lachancla/services/firebase_service.dart';
-import 'package:provider/provider.dart';
 
 class AddEventsProvider with ChangeNotifier {
   TextEditingController titleController = TextEditingController();
@@ -21,7 +19,7 @@ class AddEventsProvider with ChangeNotifier {
   Future<void> getImage(ImageSource media) async {
     var img = await picker.pickImage(source: media);
     if (img == null) return;
-    image = img!;
+    image = img;
     notifyListeners();
   }
 
