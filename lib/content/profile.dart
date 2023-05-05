@@ -1,5 +1,7 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:lachancla/screens/log_in_page.dart';
+import 'package:lachancla/services/authFunctions.dart';
 import 'package:lachancla/widgets/edit_avatar_modal.dart';
 import 'package:provider/provider.dart';
 import '../providers/states_builder_provider.dart';
@@ -19,7 +21,7 @@ class _ProfileState extends State<Profile> with TickerProviderStateMixin {
   Widget build(BuildContext context) {
     TabController _tabController = TabController(length: 2, vsync: this);
     final String profileImage =
-        "https://avatars.githubusercontent.com/u/52970365?v=4";
+        FirebaseAuth.instance.currentUser?.photoURL ?? 'https://user-images.githubusercontent.com/52970365/236109946-96fdda24-44fe-4e20-a9a8-458cc57cf026.png';
     FirebaseAuth auth = FirebaseAuth.instance;
 
     void mostrarModal(BuildContext context, String image) {
@@ -55,7 +57,7 @@ class _ProfileState extends State<Profile> with TickerProviderStateMixin {
                       ),
                     ),
                     title: Text(
-                      "Pablito",
+                      "${FirebaseAuth.instance.currentUser?.displayName ?? 'Sin Nombre'}",
                       style: TextStyle(
                         fontFamily: 'Lobster',
                         fontSize: 24,
@@ -81,13 +83,7 @@ class _ProfileState extends State<Profile> with TickerProviderStateMixin {
                         ),
                       ]),
                       onPressed: () async {
-                        await auth.signOut();
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => LogInPage(),
-                          ),
-                        );
+                        await AuthServices.signOutFirebaseUser(context);
                         print(context.read<StatesBuilderProvider>().getState());
                       },
                     ),

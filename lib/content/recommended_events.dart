@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:lachancla/providers/recommended_events_provider.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import '../widgets/easter_egg.dart';
 import '../widgets/recommended_cards.dart';
 
@@ -19,7 +20,7 @@ class RecommendedEvents extends StatelessWidget {
                 Column(
                   children: [
                     Text(
-                      "Hola Mariana",
+                      "Hola ${FirebaseAuth.instance.currentUser?.displayName ?? 'Sin Nombre'}",
                       style: TextStyle(
                           fontFamily: 'Lobster',
                           fontSize: 36,

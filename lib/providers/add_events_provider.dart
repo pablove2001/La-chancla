@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:lachancla/providers/states_builder_provider.dart';
-import 'package:provider/provider.dart';
+import 'package:lachancla/screens/events_page.dart';
+import 'package:lachancla/services/firebase_service.dart';
 
 class AddEventsProvider with ChangeNotifier {
   TextEditingController titleController = TextEditingController();
@@ -17,7 +18,8 @@ class AddEventsProvider with ChangeNotifier {
 
   Future<void> getImage(ImageSource media) async {
     var img = await picker.pickImage(source: media);
-    image = img!;
+    if (img == null) return;
+    image = img;
     notifyListeners();
   }
 
@@ -143,5 +145,19 @@ class AddEventsProvider with ChangeNotifier {
         );
       },
     );
+  }
+
+  Future<bool> submitForm(String estado, BuildContext context) async {
+    try {
+      bool nice = await createEventService(int.parse(this.capacityController.text), this.descriptionController.text, this.selectedDate, this.endDate, this.image, estado, this.titleController.text, this.urlMapsController.text);
+
+      ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('Evento creado')));
+      Navigator.push( context, MaterialPageRoute(builder: (context) => EventsPage()),);
+
+      return nice;
+    } catch (e) {}
+
+    return false;    
+    
   }
 }
