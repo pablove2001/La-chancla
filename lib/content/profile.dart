@@ -29,7 +29,7 @@ class _ProfileState extends State<Profile> with TickerProviderStateMixin {
                     leading: CircleAvatar(
                       radius: 48,
                       backgroundImage: NetworkImage(
-                        "https://avatars.githubusercontent.com/u/52970365?v=4",
+                        "${FirebaseAuth.instance.currentUser?.photoURL ?? 'https://user-images.githubusercontent.com/52970365/236109946-96fdda24-44fe-4e20-a9a8-458cc57cf026.png'}",
                       ),
                     ),
                     title: Text(

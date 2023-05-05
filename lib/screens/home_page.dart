@@ -2,6 +2,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:lachancla/screens/log_in_page.dart';
 import 'package:lachancla/screens/sign_up_page.dart';
+import 'package:lachancla/services/authFunctions.dart';
 
 class HomePage extends StatelessWidget {
   HomePage({super.key});
@@ -109,6 +110,8 @@ class HomePage extends StatelessWidget {
                     onPressed: () {
                       print(
                           '${FirebaseAuth.instance.currentUser?.displayName ?? 'Sin Nombre'}');
+                      AuthServices.signinUser(
+                          'vergarapablo2001@gmail.com', '123456', context);
                     },
                     child: Text(
                       'print',

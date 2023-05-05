@@ -11,6 +11,9 @@ class AuthServices {
 
       await FirebaseAuth.instance.currentUser!.updateDisplayName(full_name);
       await FirebaseAuth.instance.currentUser!.updateEmail(email);
+      await FirebaseAuth.instance.currentUser!.updateEmail(email);
+      await FirebaseAuth.instance.currentUser!.updatePhotoURL(
+          'https://user-images.githubusercontent.com/52970365/236108954-7cdd5f03-6539-4a32-82ba-afa96230d756.png');
       await FirestoreServices.saveUser(
           full_name, email, userCredential.user!.uid);
       ScaffoldMessenger.of(context)

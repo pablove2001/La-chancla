@@ -61,46 +61,48 @@ class _UserStepperState extends State<UserStepper> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Column(
-        children: [
-          Expanded(
-            flex: 2,
-            child: Stepper(
-              type: StepperType.horizontal,
-              currentStep: currentStep,
-              onStepContinue: continueStep,
-              onStepCancel: cancelStep,
-              onStepTapped: onStepTapped,
-              controlsBuilder: controlsBuilder,
-              steps: [
-                Step(
-                    title: Text("Step 1"),
-                    content: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        children: [
-                          InterestSelector(),
-                        ]),
-                    isActive: currentStep >= 0,
-                    state: currentStep >= 0
-                        ? StepState.complete
-                        : StepState.disabled),
-                Step(
-                    title: Text("Step 2"),
-                    content: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        children: [
-                          StatesBuilder(),
-                        ]),
-                    isActive: currentStep >= 1,
-                    state: currentStep >= 1
-                        ? StepState.complete
-                        : StepState.disabled),
-              ],
+      body: SafeArea(
+        child: Column(
+          children: [
+            Expanded(
+              flex: 2,
+              child: Stepper(
+                type: StepperType.horizontal,
+                currentStep: currentStep,
+                onStepContinue: continueStep,
+                onStepCancel: cancelStep,
+                onStepTapped: onStepTapped,
+                controlsBuilder: controlsBuilder,
+                steps: [
+                  Step(
+                      title: Text("Step 1"),
+                      content: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            InterestSelector(),
+                          ]),
+                      isActive: currentStep >= 0,
+                      state: currentStep >= 0
+                          ? StepState.complete
+                          : StepState.disabled),
+                  Step(
+                      title: Text("Step 2"),
+                      content: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            StatesBuilder(),
+                          ]),
+                      isActive: currentStep >= 1,
+                      state: currentStep >= 1
+                          ? StepState.complete
+                          : StepState.disabled),
+                ],
+              ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }
