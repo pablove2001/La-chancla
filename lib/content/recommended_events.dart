@@ -67,23 +67,23 @@ class RecommendedEvents extends StatelessWidget {
                 ),
               ],
             ),
-            Expanded(
-              child: GridView.builder(
-                scrollDirection: Axis.vertical,
-                itemCount:
-                    context.watch<RecommendedEventsProvider>().getEvents.length,
-                gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                  crossAxisCount: 2,
-                ),
-                itemBuilder: (BuildContext context, int index) {
-                  return RecommendedCards(
-                    event: context
-                        .read<RecommendedEventsProvider>()
-                        .getEvents[index],
-                  );
-                },
-              ),
-            ),
+            Expanded(child: Consumer<RecommendedEventsProvider>(
+              builder: (context, provider, child) {
+                return GridView.builder(
+                  scrollDirection: Axis.vertical,
+                  itemCount: provider.getEvents.length,
+                  gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                    crossAxisCount: 2,
+                  ),
+                  itemBuilder: (BuildContext context, int index) {
+                    provider.initProvider();
+                    return RecommendedCards(
+                      event: provider.getEvents[index],
+                    );
+                  },
+                );
+              },
+            )),
           ],
         ),
       ),

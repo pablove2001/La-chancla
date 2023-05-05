@@ -26,6 +26,7 @@ class ExploreImages extends StatelessWidget {
         itemBuilder: (BuildContext context, int index) {
           return GestureDetector(
             onTap: () {
+              context.read<RecommendedEventsProvider>().initProvider();
               Navigator.of(context).push(
                 MaterialPageRoute(
                   builder: (context) => EventDetailsPage(

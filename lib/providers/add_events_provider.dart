@@ -149,15 +149,25 @@ class AddEventsProvider with ChangeNotifier {
 
   Future<bool> submitForm(String estado, BuildContext context) async {
     try {
-      bool nice = await createEventService(int.parse(this.capacityController.text), this.descriptionController.text, this.selectedDate, this.endDate, this.image, estado, this.titleController.text, this.urlMapsController.text);
-
-      ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('Evento creado')));
-      Navigator.push( context, MaterialPageRoute(builder: (context) => EventsPage()),);
+      bool nice = await createEventService(
+          int.parse(this.capacityController.text),
+          this.descriptionController.text,
+          this.selectedDate,
+          this.endDate,
+          this.image,
+          estado,
+          this.titleController.text,
+          this.urlMapsController.text);
+      notifyListeners();
+      ScaffoldMessenger.of(context)
+          .showSnackBar(SnackBar(content: Text('Evento creado')));
+      Navigator.push(
+        context,
+        MaterialPageRoute(builder: (context) => EventsPage()),
+      );
 
       return nice;
     } catch (e) {}
-
-    return false;    
-    
+    return false;
   }
 }
