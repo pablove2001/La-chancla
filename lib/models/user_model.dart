@@ -8,7 +8,7 @@ class UserModel {
   final String state_name;
 
   // Default
-  final String photo;
+  final String photoURL;
 
   UserModel({
     // Required
@@ -20,7 +20,7 @@ class UserModel {
     required this.state_name,
 
     // Default
-    this.photo =
+    this.photoURL =
         'https://user-images.githubusercontent.com/52970365/235539406-0581dcb1-7276-42df-b8f9-6d58b619d6be.png',
   });
 }

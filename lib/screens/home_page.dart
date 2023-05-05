@@ -1,18 +1,30 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:lachancla/screens/events_page.dart';
 import 'package:lachancla/screens/log_in_page.dart';
 import 'package:lachancla/screens/sign_up_page.dart';
 import 'package:lachancla/services/authFunctions.dart';
 
-class HomePage extends StatelessWidget {
+class HomePage extends StatefulWidget {
   HomePage({super.key});
+
+  @override
+  State<HomePage> createState() => _HomePageState();
+}
+
+class _HomePageState extends State<HomePage> {
+  @override
+  void initState() {
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      if (AuthServices.isAlreadyAuthenticated()){
+        Navigator.push(context,MaterialPageRoute(builder: (context) => EventsPage()),);
+      }
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      /*appBar: AppBar(
-        title: Text('Material App Bar'),
-      ),*/
       body: SafeArea(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
