@@ -32,7 +32,7 @@ class RecommendedCards extends StatelessWidget {
                 topLeft: Radius.circular(20),
               ),
               child: Image.network(
-                "${event.images[0]}",
+                "${event.image}",
                 height: 100,
                 fit: BoxFit.cover,
                 width: double.infinity,
@@ -46,8 +46,7 @@ class RecommendedCards extends StatelessWidget {
               ),
               subtitle: Center(
                 child: Text(
-                  "${event.date}",
-                  style: TextStyle(color: Colors.grey),
+                  "${event.startDate}",
                 ),
               ),
             ),

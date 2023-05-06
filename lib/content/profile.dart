@@ -1,6 +1,12 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:lachancla/screens/log_in_page.dart';
+import 'package:lachancla/services/authFunctions.dart';
+import 'package:lachancla/widgets/edit_avatar_modal.dart';
+import 'package:provider/provider.dart';
+import '../providers/states_builder_provider.dart';
 import '../widgets/favorites_cards.dart';
-
+import 'package:firebase_auth/firebase_auth.dart';
 import '../widgets/my_events_cards.dart';
 
 class Profile extends StatefulWidget {
@@ -14,9 +20,22 @@ class _ProfileState extends State<Profile> with TickerProviderStateMixin {
   @override
   Widget build(BuildContext context) {
     TabController _tabController = TabController(length: 2, vsync: this);
+    final String profileImage =
+        FirebaseAuth.instance.currentUser?.photoURL ?? 'https://user-images.githubusercontent.com/52970365/236109946-96fdda24-44fe-4e20-a9a8-458cc57cf026.png';
+    FirebaseAuth auth = FirebaseAuth.instance;
+
+    void mostrarModal(BuildContext context, String image) {
+      showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          return EditAvatarModal(
+            profileImage: profileImage,
+          );
+        },
+      );
+    }
 
     return Scaffold(
-      backgroundColor: Color.fromRGBO(238, 216, 187, 1),
       body: SafeArea(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -26,22 +45,47 @@ class _ProfileState extends State<Profile> with TickerProviderStateMixin {
                 Container(
                   margin: EdgeInsets.only(top: 10, left: 10, right: 10),
                   child: ListTile(
-                    leading: Image.network(
-                      "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Ftse3.mm.bing.net%2Fth%3Fid%3DOIP.8DDnZg9-q5BkyTcfOAYsbwHaGA%26pid%3DApi&f=1&ipt=7467acdf6413d32d971e931d16ff58ba57ef92753e5476e53d6842ea03b599e4&ipo=images",
+                    leading: GestureDetector(
+                      onTap: () {
+                        mostrarModal(context, profileImage);
+                      },
+                      child: CircleAvatar(
+                        radius: 48,
+                        backgroundImage: NetworkImage(
+                          profileImage,
+                        ),
+                      ),
                     ),
                     title: Text(
-                      "name",
+                      "${FirebaseAuth.instance.currentUser?.displayName ?? 'Sin Nombre'}",
                       style: TextStyle(
                         fontFamily: 'Lobster',
                         fontSize: 24,
                       ),
                     ),
                     subtitle: Text(
-                      "tipo de cuenta",
+                      "21-04-2023",
                       style: TextStyle(
                         fontFamily: 'Lobster',
                         fontSize: 20,
                       ),
+                    ),
+                    trailing: MaterialButton(
+                      child: Column(children: [
+                        Icon(
+                          Icons.logout,
+                        ),
+                        Text(
+                          "Log out",
+                          style: TextStyle(
+                            fontSize: 12,
+                          ),
+                        ),
+                      ]),
+                      onPressed: () async {
+                        await AuthServices.signOutFirebaseUser(context);
+                        print(context.read<StatesBuilderProvider>().getState());
+                      },
                     ),
                   ),
                 ),
@@ -55,7 +99,7 @@ class _ProfileState extends State<Profile> with TickerProviderStateMixin {
                 alignment: Alignment.centerLeft,
                 child: TabBar(
                   controller: _tabController,
-                  labelColor: Colors.black,
+                  indicatorColor: Colors.white,
                   unselectedLabelColor: Colors.grey,
                   tabs: [
                     Tab(

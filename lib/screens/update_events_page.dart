@@ -1,25 +1,79 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 class UpdateEventsPage extends StatelessWidget {
-  const UpdateEventsPage({super.key});
+  TextEditingController titleController = TextEditingController();
+  TextEditingController descriptionController = TextEditingController();
+  TextEditingController capacityController = TextEditingController();
+  TextEditingController urlMapsController = TextEditingController();
+  TextEditingController statusCOntroller = TextEditingController();
+  UpdateEventsPage({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color.fromRGBO(238, 216, 187, 1),
       body: SafeArea(
         child: Column(
           children: [
             Text(
               "Actualizar Evento",
-              style: TextStyle(
-                  fontFamily: 'Lobster', fontSize: 36, color: Colors.black),
+              style: TextStyle(fontFamily: 'Lobster', fontSize: 36),
             ),
             Padding(
-              padding: const EdgeInsets.all(30.0),
+              padding: EdgeInsets.only(
+                top: 30.0,
+                left: 30.0,
+                right: 30.0,
+              ),
               child: Form(
                 child: Column(
-                  children: [],
+                  children: [
+                    TextFormField(
+                      controller: titleController,
+                      decoration: InputDecoration(
+                        border: OutlineInputBorder(),
+                        hintText: 'Enter a new title...',
+                        labelText: 'New title',
+                      ),
+                    ),
+                    SizedBox(
+                      height: 20,
+                    ),
+                    TextFormField(
+                      controller: descriptionController,
+                      decoration: InputDecoration(
+                        border: OutlineInputBorder(),
+                        hintText: 'Enter a new description...',
+                        labelText: 'New description',
+                      ),
+                      maxLines: 5,
+                    ),
+                    SizedBox(
+                      height: 20,
+                    ),
+                    TextFormField(
+                      controller: urlMapsController,
+                      decoration: InputDecoration(
+                        border: OutlineInputBorder(),
+                        hintText: 'Enter a new Google Maps url...',
+                        labelText: 'New Google Maps',
+                      ),
+                    ),
+                    SizedBox(
+                      height: 20,
+                    ),
+                    TextField(
+                      controller: capacityController,
+                      decoration: InputDecoration(labelText: "New capacity"),
+                      keyboardType: TextInputType.number,
+                      inputFormatters: <TextInputFormatter>[
+                        FilteringTextInputFormatter.digitsOnly
+                      ],
+                    ),
+                    SizedBox(
+                      height: 20,
+                    ),
+                  ],
                 ),
               ),
             ),

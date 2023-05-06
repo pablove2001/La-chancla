@@ -11,8 +11,11 @@ class FavoritesCards extends StatelessWidget {
         borderRadius: BorderRadius.circular(15.0),
       ),
       child: ListTile(
-        leading: Image.network(
-          "https://i.stack.imgur.com/Of2w5.jpg",
+        leading: ClipRRect(
+          borderRadius: BorderRadius.circular(10.0),
+          child: Image.network(
+            "https://i.stack.imgur.com/Of2w5.jpg",
+          ),
         ),
         title: Text('Melbourne Cricket Stadium'),
         subtitle: Text('Australia'),

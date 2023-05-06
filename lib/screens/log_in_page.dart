@@ -3,17 +3,18 @@ import 'package:flutter_signin_button/button_list.dart';
 import 'package:flutter_signin_button/button_view.dart';
 import 'package:lachancla/screens/events_page.dart';
 import 'package:lachancla/screens/sign_up_page.dart';
+import 'package:lachancla/services/authFunctions.dart';
 
 class LogInPage extends StatelessWidget {
-  TextEditingController nameController = TextEditingController();
+  TextEditingController emailController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
+  bool logged = false;
 
   LogInPage({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color.fromRGBO(238, 216, 187, 1),
       body: SafeArea(
         child: Padding(
           padding: const EdgeInsets.only(left: 30, right: 30),
@@ -39,7 +40,7 @@ class LogInPage extends StatelessWidget {
               Container(
                 padding: const EdgeInsets.all(10),
                 child: TextField(
-                  controller: nameController,
+                  controller: emailController,
                   decoration: const InputDecoration(
                     border: OutlineInputBorder(),
                     labelText: 'Email',
@@ -79,11 +80,19 @@ class LogInPage extends StatelessWidget {
                   color: Colors.blue,
                 ),
                 child: TextButton(
-                  onPressed: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(builder: (context) => EventsPage()),
-                    );
+                  onPressed: () async {
+                    print(emailController.text);
+                    print(passwordController.text);
+
+                    logged = await AuthServices.signinUser(
+                        emailController.text, passwordController.text, context);
+
+                    if (logged) {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) => EventsPage()),
+                      );
+                    }
                   },
                   child: Text(
                     'Log in',
@@ -119,7 +128,7 @@ class LogInPage extends StatelessWidget {
                     flex: 1,
                     child: Container(
                       height: 1,
-                      color: Color.fromARGB(255, 0, 0, 0),
+                      color: Colors.white,
                       margin: EdgeInsets.symmetric(vertical: 10),
                     ),
                   ),
@@ -134,7 +143,7 @@ class LogInPage extends StatelessWidget {
                     flex: 1,
                     child: Container(
                       height: 1,
-                      color: Color.fromARGB(255, 0, 0, 0),
+                      color: Colors.white,
                       margin: EdgeInsets.symmetric(vertical: 10),
                     ),
                   ),
@@ -143,7 +152,7 @@ class LogInPage extends StatelessWidget {
               SizedBox(height: 15),
               SignInButton(
                 Buttons.Google,
-                text: "Sign up with Google",
+                text: "Log in with Google",
                 onPressed: () {},
               ),
             ],

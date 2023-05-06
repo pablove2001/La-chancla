@@ -14,35 +14,43 @@ class MyEventsCards extends StatelessWidget {
       child: Column(
         children: [
           ListTile(
-            leading: Image.network(
-              "https://knightsbanner.com/wp-content/uploads/2018/02/The_Greatest_Showman-copy-900x400.png",
+            leading: ClipRRect(
+              borderRadius: BorderRadius.circular(10.0),
+              child: Image.network(
+                "https://knightsbanner.com/wp-content/uploads/2018/02/The_Greatest_Showman-copy-900x400.png",
+              ),
             ),
             title: Text('Melbourne Cricket Stadium'),
             subtitle: Text('Australia'),
-          ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.end,
-            children: [
-              MaterialButton(
-                child: Icon(
-                  Icons.edit,
+            trailing: PopupMenuButton(
+              itemBuilder: (context) => [
+                PopupMenuItem(
+                  child: MaterialButton(
+                    minWidth: double.infinity,
+                    child: Icon(Icons.edit),
+                    onPressed: () {
+                      Navigator.of(context).push(
+                        MaterialPageRoute(
+                          builder: (context) => UpdateEventsPage(),
+                        ),
+                      );
+                    },
+                  ),
+                  value: 1,
                 ),
-                onPressed: () {
-                  Navigator.of(context).push(
-                    MaterialPageRoute(
-                      builder: (context) => UpdateEventsPage(),
+                PopupMenuItem(
+                  child: MaterialButton(
+                    minWidth: double.infinity,
+                    child: Icon(
+                      Icons.delete,
                     ),
-                  );
-                },
-              ),
-              MaterialButton(
-                child: Icon(
-                  Icons.delete,
-                ),
-                onPressed: () => _dialogBuilder(context),
-              ),
-            ],
-          )
+                    onPressed: () => _dialogBuilder(context),
+                  ),
+                  value: 2,
+                )
+              ],
+            ),
+          ),
         ],
       ),
     );
@@ -54,7 +62,7 @@ Future<void> _dialogBuilder(BuildContext context) {
     context: context,
     builder: (BuildContext context) {
       return AlertDialog(
-        title: Text('Quieres eliminarlo?'),
+        title: Text('Are you sure you want to delete this event?'),
         actions: <Widget>[
           TextButton(
             style: TextButton.styleFrom(
