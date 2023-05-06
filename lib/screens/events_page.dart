@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:lachancla/providers/events_page_provider.dart';
-import 'package:lachancla/screens/add_events_page.dart';
 import 'package:lachancla/screens/add_events_page_prov.dart';
 import 'package:provider/provider.dart';
 import '../content/events.dart';

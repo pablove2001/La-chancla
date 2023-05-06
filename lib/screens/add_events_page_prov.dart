@@ -206,14 +206,18 @@ class AddEventsPageProv extends StatelessWidget {
                           color: Colors.blue,
                         ),
                         child: TextButton(
-                          onPressed: () async{
+                          onPressed: () async {
                             // TODO: validar formulario
 
-
-                            String estado = context.read<StatesBuilderProvider>().getState() ?? 'Jalisco';
-                            bool nice = await context.read<AddEventsProvider>().submitForm(estado, context);
+                            String estado = context
+                                    .read<StatesBuilderProvider>()
+                                    .getState() ??
+                                'Jalisco';
+                            bool nice = await context
+                                .read<AddEventsProvider>()
+                                .submitForm(estado, context);
                             if (nice) {
-                              
+                              context.read<AddEventsProvider>().cleanValues();
                             }
                           },
                           child: Text(
@@ -224,7 +228,9 @@ class AddEventsPageProv extends StatelessWidget {
                       ),
                     ],
                   ),
-                  SizedBox(height: 20,),
+                  SizedBox(
+                    height: 20,
+                  ),
                 ],
               ),
             ),
