@@ -16,8 +16,11 @@ class _HomePageState extends State<HomePage> {
   @override
   void initState() {
     WidgetsBinding.instance.addPostFrameCallback((_) {
-      if (AuthServices.isAlreadyAuthenticated()){
-        Navigator.push(context,MaterialPageRoute(builder: (context) => EventsPage()),);
+      if (AuthServices.isAlreadyAuthenticated()) {
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => EventsPage()),
+        );
       }
     });
   }
@@ -101,32 +104,6 @@ class _HomePageState extends State<HomePage> {
                     },
                     child: Text(
                       'Sign up',
-                      style: TextStyle(
-                        color: Colors.white,
-                        fontSize: 20,
-                      ),
-                    ),
-                  ),
-                ),
-                SizedBox(
-                  height: 20,
-                ),
-                Container(
-                  width: 300,
-                  height: 50,
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(30),
-                    color: Colors.blue,
-                  ),
-                  child: TextButton(
-                    onPressed: () {
-                      print(
-                          '${FirebaseAuth.instance.currentUser?.displayName ?? 'Sin Nombre'}');
-                      AuthServices.signinUser(
-                          'vergarapablo2001@gmail.com', '123456', context);
-                    },
-                    child: Text(
-                      'print',
                       style: TextStyle(
                         color: Colors.white,
                         fontSize: 20,
