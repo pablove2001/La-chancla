@@ -14,6 +14,14 @@
       },
       "oauth_client": [
         {
+          "client_id": "332914717990-muodtuddj9p0euif1q6aa8uo9qi7a48g.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "iteso.mx.lachancla",
+            "certificate_hash": "f00beae2e4790f17bca0b91987487dc943829733"
+          }
+        },
+        {
           "client_id": "332914717990-3sri5kc7udj70dqene57g084pm61tghg.apps.googleusercontent.com",
           "client_type": 3
         }
@@ -29,6 +37,13 @@
             {
               "client_id": "332914717990-3sri5kc7udj70dqene57g084pm61tghg.apps.googleusercontent.com",
               "client_type": 3
+            },
+            {
+              "client_id": "332914717990-3bpgbqd4ljoqlrprh7f873jdpos4dfjm.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "iteso.mx.lachancla"
+              }
             }
           ]
         }
