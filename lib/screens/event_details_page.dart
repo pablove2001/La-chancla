@@ -2,9 +2,6 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:lachancla/models/events_model.dart';
-import 'package:lachancla/providers/event_details_provider.dart';
-import 'package:lachancla/widgets/image_coursel_slider.dart';
-import 'package:provider/provider.dart';
 
 class EventDetailsPage extends StatelessWidget {
   final EventsModel event;

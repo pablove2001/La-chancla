@@ -4,7 +4,6 @@ import 'package:flutter/services.dart';
 import 'package:intl/intl.dart';
 import 'package:lachancla/providers/add_events_provider.dart';
 import 'package:lachancla/providers/states_builder_provider.dart';
-import 'package:lachancla/services/firebase_service.dart';
 import 'package:lachancla/widgets/states_builder.dart';
 import 'package:provider/provider.dart';
 

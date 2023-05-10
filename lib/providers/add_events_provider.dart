@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:lachancla/providers/states_builder_provider.dart';
 import 'package:lachancla/screens/events_page.dart';
 import 'package:lachancla/services/firebase_service.dart';
 
@@ -17,7 +16,12 @@ class AddEventsProvider with ChangeNotifier {
   TimeOfDay endTime = TimeOfDay.fromDateTime(DateTime.now());
 
   Future<void> getImage(ImageSource media) async {
-    var img = await picker.pickImage(source: media);
+    var img = await picker.pickImage(
+      source: ImageSource.camera,
+      maxHeight: 720,
+      maxWidth: 720,
+      imageQuality: 85,
+    );
     if (img == null) return;
     image = img;
     notifyListeners();

@@ -14,6 +14,14 @@
       },
       "oauth_client": [
         {
+          "client_id": "332914717990-16v92c33ih7pr1tan4rj4pubjdpld010.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "iteso.mx.lachancla",
+            "certificate_hash": "57c401f5d4b0ef89e28875dafeb6841e7fc03cca"
+          }
+        },
+        {
           "client_id": "332914717990-muodtuddj9p0euif1q6aa8uo9qi7a48g.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {

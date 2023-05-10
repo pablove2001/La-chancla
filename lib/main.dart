@@ -5,11 +5,16 @@ import 'package:lachancla/providers/events_page_provider.dart';
 import 'package:lachancla/providers/recommended_events_provider.dart';
 import 'package:lachancla/providers/states_builder_provider.dart';
 import 'package:lachancla/providers/stepper_provider.dart';
+import 'package:lachancla/screens/events_page.dart';
 import 'package:lachancla/screens/home_page.dart';
+import 'package:lachancla/services/bloc/auth_bloc.dart';
 import 'package:provider/provider.dart';
 // firebase
 import 'package:firebase_core/firebase_core.dart';
 import 'firebase_options.dart';
+
+//bloc
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -19,6 +24,9 @@ void main() async {
   runApp(
     MultiProvider(
       providers: [
+        BlocProvider(
+          create: (context) => AuthBloc()..add(VerifyAuthEvent()),
+        ),
         // ChangeNotifierProvider(create: (_) => RecommendedEventsProvider()),
         ChangeNotifierProvider<RecommendedEventsProvider>.value(
           value: RecommendedEventsProvider()..initProvider(),
@@ -48,7 +56,29 @@ class MyApp extends StatelessWidget {
         primaryColor: Colors.lightBlue[800],
         scaffoldBackgroundColor: Colors.black,
       ),
-      home: HomePage(),
+      home: BlocConsumer<AuthBloc, AuthState>(
+        listener: (context, state) {
+          if (state is AuthErrorState) {
+            ScaffoldMessenger.of(context).showSnackBar(
+              SnackBar(
+                content: Text("Favor de autenticarse. ${state.eMsg}"),
+              ),
+            );
+          }
+        },
+        builder: (context, state) {
+          if (state is AuthSuccessState) {
+            return EventsPage();
+          } else if (state is UnAuthState ||
+              state is AuthErrorState ||
+              state is SignOutSuccessState) {
+            return HomePage();
+          }
+          return Center(
+            child: CircularProgressIndicator(),
+          ); // TODO: replace with Splash screen page (opcional)
+        },
+      ),
     );
   }
 }
