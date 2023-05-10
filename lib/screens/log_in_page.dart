@@ -4,6 +4,7 @@ import 'package:flutter_signin_button/button_view.dart';
 import 'package:lachancla/screens/events_page.dart';
 import 'package:lachancla/screens/sign_up_page.dart';
 import 'package:lachancla/services/authFunctions.dart';
+import 'package:package_info_plus/package_info_plus.dart';
 
 class LogInPage extends StatelessWidget {
   TextEditingController emailController = TextEditingController();
@@ -153,7 +154,13 @@ class LogInPage extends StatelessWidget {
               SignInButton(
                 Buttons.Google,
                 text: "Log in with Google",
-                onPressed: () {},
+                onPressed: () async {
+                  // PackageInfo packageInfo = await PackageInfo.fromPlatform();
+                  // String appName = packageInfo.appName;
+                  // print(appName);
+                  await AuthServices.signInWithGoogle();
+                  print("usuario logiado");
+                },
               ),
             ],
           ),

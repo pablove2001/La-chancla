@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 import 'package:lachancla/screens/home_page.dart';
 import 'package:lachancla/services/firebaseFunctions.dart';
 
@@ -74,5 +75,20 @@ class AuthServices {
   static Future<void> signOutFirebaseUser(BuildContext context) async {
     await FirebaseAuth.instance.signOut();
     Navigator.push(context, MaterialPageRoute( builder: (context) => HomePage()));
+  }
+
+  static Future<void> signInWithGoogle() async {
+    GoogleSignInAccount? googleUser = await GoogleSignIn().signIn();
+
+    GoogleSignInAuthentication? googleAuth = await googleUser?.authentication;
+
+    AuthCredential credential = GoogleAuthProvider.credential(
+      accessToken: googleAuth?.accessToken,
+      idToken: googleAuth?.idToken
+    );
+
+    UserCredential userCredential=await FirebaseAuth.instance.signInWithCredential(credential);
+
+    print(userCredential.user?.displayName);
   }
 }
