@@ -1,9 +1,12 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:lachancla/screens/events_page.dart';
 import 'package:lachancla/screens/log_in_page.dart';
 import 'package:lachancla/screens/sign_up_page.dart';
 import 'package:lachancla/services/authFunctions.dart';
+import 'package:lachancla/services/bloc/auth_bloc.dart';
+import 'package:lachancla/services/bloc/user_auth_repository.dart';
 
 class HomePage extends StatefulWidget {
   HomePage({super.key});
