@@ -18,8 +18,8 @@ class AddEventsProvider with ChangeNotifier {
   Future<void> getImage(ImageSource media) async {
     var img = await picker.pickImage(
       source: ImageSource.camera,
-      maxHeight: 720,
-      maxWidth: 720,
+      maxHeight: 150,
+      maxWidth: 280,
       imageQuality: 85,
     );
     if (img == null) return;

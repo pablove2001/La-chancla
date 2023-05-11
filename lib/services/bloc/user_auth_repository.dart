@@ -93,6 +93,34 @@ class UserAuthRepository {
       idToken: googleAuth.idToken,
       accessToken: googleAuth.accessToken,
     );
-    await _auth.signInWithCredential(credential);
+
+    UserCredential userCredential =
+        await _auth.signInWithCredential(credential);
+    final String uid = userCredential.user!.uid;
+
+    final QuerySnapshot<Map<String, dynamic>> snapshot = await FirebaseFirestore
+        .instance
+        .collection('users')
+        .where(FieldPath.documentId, isEqualTo: uid)
+        .get();
+
+    if (snapshot.size == 0) {
+      await FirebaseFirestore.instance.collection('users').doc(uid).set({
+        'name': _googleSignIn.currentUser!.displayName,
+        'email': _googleSignIn.currentUser!.email,
+        'photoURL': _googleSignIn.currentUser!.photoUrl,
+      });
+
+      await FirebaseFirestore.instance.collection('users').doc(uid).update(
+        {
+          'gustos': [],
+          'state_name': 'Jalisco',
+          'favorite_events': [],
+          'events_created': [],
+          'photoURL':
+              'https://user-images.githubusercontent.com/52970365/236108954-7cdd5f03-6539-4a32-82ba-afa96230d756.png'
+        },
+      );
+    }
   }
 }

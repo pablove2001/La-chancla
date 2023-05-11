@@ -1,8 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_signin_button/button_list.dart';
-import 'package:flutter_signin_button/button_view.dart';
-import 'package:lachancla/screens/events_page.dart';
 import 'package:lachancla/screens/log_in_page.dart';
 import 'package:lachancla/screens/starting_page.dart';
 import 'package:lachancla/services/bloc/auth_bloc.dart';
