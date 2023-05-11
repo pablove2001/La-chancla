@@ -80,43 +80,19 @@ class EventDetailsPage extends StatelessWidget {
                     Column(
                       children: [
                         Text(
-                          'Price:',
-                          style: TextStyle(fontSize: 24),
-                        ),
-                        Text("\$ ${event.price.toStringAsFixed(2)}"),
-                      ],
-                    ),
-                    Column(
-                      children: [
-                        Text(
                           'Capacity:',
                           style: TextStyle(fontSize: 24),
                         ),
                         Text("${event.capacity}"),
                       ],
                     ),
-                  ],
-                ),
-                SizedBox(height: 25),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceAround,
-                  children: [
                     Column(
                       children: [
                         Text(
                           'Place:',
                           style: TextStyle(fontSize: 24),
                         ),
-                        Text(event.urlMaps),
-                      ],
-                    ),
-                    Column(
-                      children: [
-                        Text(
-                          'Age:',
-                          style: TextStyle(fontSize: 24),
-                        ),
-                        Text("From ${event.minimumAge} to ${event.maximumAge}"),
+                        Text(event.urlMaps.substring(0, 16)),
                       ],
                     ),
                   ],
