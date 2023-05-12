@@ -32,10 +32,6 @@ class EventDetailsPage extends StatelessWidget {
               }
             },
           ),
-          IconButton(
-            icon: Icon(Icons.favorite),
-            onPressed: () {},
-          ),
         ],
       ),
       body: ListView(
@@ -165,13 +161,13 @@ class EventDetailsPage extends StatelessWidget {
                             child: Column(
                               children: [
                                 Text(
-                                  'Place',
+                                  'Estado',
                                   style: TextStyle(fontSize: 24),
                                 ),
                                 SizedBox(
                                   height: 10,
                                 ),
-                                Text(event.urlMaps.substring(0, 16)),
+                                Text("${event.state_name}"),
                               ],
                             ),
                           ),
@@ -179,26 +175,6 @@ class EventDetailsPage extends StatelessWidget {
                       ],
                     ),
                   ],
-                ),
-                SizedBox(height: 25),
-                Center(
-                  child: Card(
-                    child: Padding(
-                      padding: EdgeInsets.all(8.0),
-                      child: Column(
-                        children: [
-                          Text(
-                            'Estado',
-                            style: TextStyle(fontSize: 24),
-                          ),
-                          SizedBox(
-                            height: 10,
-                          ),
-                          Text("${event.state_name}"),
-                        ],
-                      ),
-                    ),
-                  ),
                 ),
               ],
             ),
