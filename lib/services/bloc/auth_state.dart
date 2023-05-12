@@ -47,3 +47,7 @@ class UserNotFoundState extends AuthState {
 class WrongPasswordState extends AuthState {
   // para mostrar el login
 }
+
+class AuthSuccessUserCreatedState extends AuthState {
+  // para mostrar el login
+}

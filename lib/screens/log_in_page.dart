@@ -3,6 +3,7 @@ import 'package:flutter_signin_button/button_list.dart';
 import 'package:flutter_signin_button/button_view.dart';
 import 'package:lachancla/screens/events_page.dart';
 import 'package:lachancla/screens/sign_up_page.dart';
+import 'package:lachancla/screens/starting_page.dart';
 import 'package:lachancla/services/bloc/auth_bloc.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:lachancla/services/bloc/user_auth_repository.dart';
@@ -24,6 +25,11 @@ class LogInPage extends StatelessWidget {
           Navigator.push(
             context,
             MaterialPageRoute(builder: (context) => EventsPage()),
+          );
+        } else if (state is AuthSuccessUserCreatedState) {
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => StartingPage()),
           );
         } else if (state is InvalidCredentialsState) {
           ScaffoldMessenger.of(context).showSnackBar(SnackBar(

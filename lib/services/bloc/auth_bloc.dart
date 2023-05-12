@@ -61,8 +61,12 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
   FutureOr<void> _authGoogle(event, emit) async {
     emit(AuthLoadingState());
     try {
-      await _authRepo.signInWithGoogle();
-      emit(AuthSuccessState());
+      String result = await _authRepo.signInWithGoogle();
+      if (result == "success-create-user") {
+        emit(AuthSuccessUserCreatedState());
+      } else {
+        emit(AuthSuccessState());
+      }
     } catch (e) {
       emit(AuthErrorState(eMsg: "Ha ocurrido un error en login con Google."));
     }
