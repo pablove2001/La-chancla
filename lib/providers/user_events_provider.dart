@@ -4,24 +4,10 @@ import 'package:lachancla/models/events_model.dart';
 import 'package:lachancla/services/firebase_service.dart';
 
 class UserEventsProvider with ChangeNotifier {
-  List<EventsModel> _events = List.generate(
-    10,
-    (index) => EventsModel(
-      title: 'title',
-      description: 'description',
-      image: 'https://i.waifu.pics/WGTA1vN.png',
-      startDate: DateTime(2023, 12, 29, 13),
-      endDate: DateTime(2023, 12, 29, 18),
-      urlMaps: 'https://goo.gl/maps/8NQFMEJm7nypwHjPA',
-      state_name: 'Colima',
-      capacity: 100,
-      id_organizer: 'asdf1234',
-      status: 'active',
-    ),
-  );
+  List<EventsModel> _events = [];
   List<EventsModel> get getEvents => _events;
 
-  void initProvider() async {
+  Future<void> initProvider() async {
     //get uid of current user
     final FirebaseAuth _auth = FirebaseAuth.instance;
     final User? user = _auth.currentUser;
@@ -51,5 +37,11 @@ class UserEventsProvider with ChangeNotifier {
     } else {
       print('uid is null');
     }
+  }
+
+  void borrarEvento(EventsModel evento) async {
+    await borrarEventoFirebase(evento);   
+    await initProvider();
+    notifyListeners();
   }
 }

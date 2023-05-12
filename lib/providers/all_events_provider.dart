@@ -7,7 +7,7 @@ class AllEventsProvider with ChangeNotifier {
 
   List<EventsModel> get getEvents => _events;
 
-  void initProvider() async {
+  Future<void> initProvider() async {
     List eventsFirebase = await getAllEventsFirebase();
     List<EventsModel> events = [];
     for (var event in eventsFirebase) {

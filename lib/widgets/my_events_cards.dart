@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:lachancla/providers/user_events_provider.dart';
+import 'package:lachancla/screens/event_details_page.dart';
 import 'package:lachancla/screens/update_events_page.dart';
+import 'package:provider/provider.dart';
 import '../models/events_model.dart';
 
 class MyEventsCards extends StatelessWidget {
@@ -32,11 +35,11 @@ class MyEventsCards extends StatelessWidget {
                 PopupMenuItem(
                   child: MaterialButton(
                     minWidth: double.infinity,
-                    child: Icon(Icons.edit),
+                    child: Icon(Icons.remove_red_eye_outlined),
                     onPressed: () {
                       Navigator.of(context).push(
                         MaterialPageRoute(
-                          builder: (context) => UpdateEventsPage(),
+                          builder: (context) => EventDetailsPage(event: this.event),
                         ),
                       );
                     },
@@ -49,7 +52,10 @@ class MyEventsCards extends StatelessWidget {
                     child: Icon(
                       Icons.delete,
                     ),
-                    onPressed: () => _dialogBuilder(context),
+                    onPressed: (){
+                      Navigator.of(context).pop();
+                      _dialogBuilder(context, this.event);
+                    },
                   ),
                   value: 2,
                 )
@@ -62,7 +68,7 @@ class MyEventsCards extends StatelessWidget {
   }
 }
 
-Future<void> _dialogBuilder(BuildContext context) {
+Future<void> _dialogBuilder(BuildContext context, EventsModel event) {
   return showDialog<void>(
     context: context,
     builder: (BuildContext context) {
@@ -87,6 +93,7 @@ Future<void> _dialogBuilder(BuildContext context) {
               style: TextStyle(color: Colors.red),
             ),
             onPressed: () {
+              context.read<UserEventsProvider>().borrarEvento(event);
               Navigator.of(context).pop();
             },
           ),

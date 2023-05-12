@@ -5,6 +5,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:firebase_storage/firebase_storage.dart';
+import 'package:lachancla/models/events_model.dart';
 
 FirebaseFirestore db = FirebaseFirestore.instance;
 
@@ -52,6 +53,29 @@ Future<List> getUserEventsFirebase(String uid) async {
   });
 
   return userEvents;
+}
+
+Future<bool> borrarEventoFirebase(EventsModel event) async {
+  try {
+    await FirebaseFirestore.instance
+      .collection('events')
+      .where('title', isEqualTo: event.title)
+      .where('capacity', isEqualTo: event.capacity)
+      .where('description', isEqualTo: event.description)
+      .where('id_organizer', isEqualTo: event.id_organizer)
+      .where('image', isEqualTo: event.image)
+      .where('state_name', isEqualTo: event.state_name)
+      .where('urlMaps', isEqualTo: event.urlMaps)
+      .get()
+      .then((querySnapshot) {
+        querySnapshot.docs.forEach((document) {
+          document.reference.delete();
+        });
+      });
+    return true;
+  } catch (e) {
+    return false;
+  }
 }
 
 Future<bool> updateUserStepper(
