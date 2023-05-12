@@ -19,10 +19,16 @@ class EventDetailsPage extends StatelessWidget {
         actions: [
           IconButton(
             icon: Icon(Icons.map_outlined),
-            onPressed: () async{
+            onPressed: () async {
               Uri _url = Uri.parse(event.urlMaps);
-              if (!await launchUrl(_url)) {
-                throw Exception('Could not launch $_url');
+              try {
+                if (!await launchUrl(_url)) {
+                  throw Exception('Could not launch $_url');
+                }
+              } catch (e) {
+                final snackBar =
+                    SnackBar(content: Text('Error con el link de maps'));
+                ScaffoldMessenger.of(context).showSnackBar(snackBar);
               }
             },
           ),
