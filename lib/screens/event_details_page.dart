@@ -20,8 +20,8 @@ class EventDetailsPage extends StatelessWidget {
           IconButton(
             icon: Icon(Icons.map_outlined),
             onPressed: () async {
-              Uri _url = Uri.parse(event.urlMaps);
               try {
+                Uri _url = Uri.parse(event.urlMaps);
                 if (!await launchUrl(_url)) {
                   throw Exception('Could not launch $_url');
                 }
