@@ -126,18 +126,16 @@ class _ProfileState extends State<Profile> with TickerProviderStateMixin {
                 child: TabBarView(
                   controller: _tabController,
                   children: [
-                    Consumer<UserEventsProvider>(
-                      builder: (context, provider, child) {
-                        return ListView.builder(
-                          scrollDirection: Axis.vertical,
-                          padding: EdgeInsets.all(10),
-                          itemCount: provider.getEvents.length,
-                          itemBuilder: (BuildContext context, int index) {
-                            provider.initProvider();
-                            return MyEventsCards(
-                                event: provider.getEvents[index]);
-                          },
-                        );
+                    ListView.builder(
+                      scrollDirection: Axis.vertical,
+                      padding: EdgeInsets.all(10),
+                      itemCount:
+                          context.watch<UserEventsProvider>().getEvents.length,
+                      itemBuilder: (BuildContext context, int index) {
+                        return MyEventsCards(
+                            event: context
+                                .read<UserEventsProvider>()
+                                .getEvents[index]);
                       },
                     ),
                     ListView.builder(
