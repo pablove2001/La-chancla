@@ -9,6 +9,7 @@ import 'package:firebase_storage/firebase_storage.dart';
 FirebaseFirestore db = FirebaseFirestore.instance;
 
 Future<List> getFilteredEventsFirebase() async {
+  if (FirebaseAuth.instance.currentUser == null) return [];
   String uid = FirebaseAuth.instance.currentUser!.uid;
   DocumentSnapshot userSnapshot = await FirebaseFirestore.instance.collection('users').doc(uid).get();
   
