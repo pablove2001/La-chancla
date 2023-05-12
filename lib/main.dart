@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:lachancla/providers/add_events_provider.dart';
+import 'package:lachancla/providers/all_events_provider.dart';
 import 'package:lachancla/providers/event_details_provider.dart';
 import 'package:lachancla/providers/events_page_provider.dart';
 import 'package:lachancla/providers/recommended_events_provider.dart';
@@ -31,6 +32,9 @@ void main() async {
         // ChangeNotifierProvider(create: (_) => RecommendedEventsProvider()),
         ChangeNotifierProvider<RecommendedEventsProvider>.value(
           value: RecommendedEventsProvider()..initProvider(),
+        ),
+        ChangeNotifierProvider<AllEventsProvider>.value(
+          value: AllEventsProvider()..initProvider(),
         ),
         ChangeNotifierProvider(create: (_) => EventsPageProvider()),
         ChangeNotifierProvider(create: (_) => EventDetailsProvider()),

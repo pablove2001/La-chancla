@@ -8,11 +8,27 @@ import 'package:firebase_storage/firebase_storage.dart';
 
 FirebaseFirestore db = FirebaseFirestore.instance;
 
-Future<List> getEventsFirebase() async {
-  List events = [];
-  CollectionReference collectionReferenceEvents = db.collection('events');
+Future<List> getFilteredEventsFirebase() async {
+  String uid = FirebaseAuth.instance.currentUser!.uid;
+  DocumentSnapshot userSnapshot = await FirebaseFirestore.instance.collection('users').doc(uid).get();
+  
+  Map<String, dynamic>? data = userSnapshot.data() as Map<String, dynamic>?;
 
-  QuerySnapshot queryEvents = await collectionReferenceEvents.get();
+  List events = [];
+
+  QuerySnapshot queryEvents = await FirebaseFirestore.instance.collection('events').where('state_name', isEqualTo: data!['state_name']).get();
+
+  queryEvents.docs.forEach((doc) {
+    events.add(doc.data());
+  });
+
+  return events;
+}
+
+Future<List> getAllEventsFirebase() async {
+  List events = [];
+
+  QuerySnapshot queryEvents = await FirebaseFirestore.instance.collection('events').get();
 
   queryEvents.docs.forEach((doc) {
     events.add(doc.data());
@@ -52,6 +68,8 @@ Future<bool> updateUserStepper(
     // mostrar ScaffoldMessenger
     ScaffoldMessenger.of(context)
         .showSnackBar(SnackBar(content: Text('Configuraciones guardadas')));
+
+    await getFilteredEventsFirebase();
 
     return true;
   } on FirebaseAuthException catch (e) {

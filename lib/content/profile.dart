@@ -60,7 +60,7 @@ class _ProfileState extends State<Profile> with TickerProviderStateMixin {
                           mostrarModal(context, profileImage);
                         },
                         child: CircleAvatar(
-                          radius: 48,
+                          radius: 30,
                           backgroundImage: NetworkImage(
                             profileImage,
                           ),
