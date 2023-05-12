@@ -152,3 +152,15 @@ Future<String> subirImagenAFirebase(XFile imagen) async {
   }
   return 'https://avatars.githubusercontent.com/u/43918722?v=4';
 }
+
+Future<bool> actualizarFotoPerfil(String url) async {
+  String uid = FirebaseAuth.instance.currentUser!.uid;
+
+  try {
+    await FirebaseFirestore.instance.collection('users').doc(uid).update({'photoURL': url });
+    await FirebaseAuth.instance.currentUser!.updatePhotoURL(url);
+    return true;
+  } catch(e) {
+    return false;
+  }
+}

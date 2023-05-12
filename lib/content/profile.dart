@@ -1,6 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:lachancla/providers/upload_photo_provider.dart';
 import 'package:lachancla/providers/user_events_provider.dart';
 import 'package:lachancla/screens/home_page.dart';
 import 'package:lachancla/services/bloc/auth_bloc.dart';
@@ -20,17 +21,12 @@ class _ProfileState extends State<Profile> with TickerProviderStateMixin {
   @override
   Widget build(BuildContext context) {
     TabController _tabController = TabController(length: 2, vsync: this);
-    final String profileImage = FirebaseAuth.instance.currentUser?.photoURL ??
-        'https://user-images.githubusercontent.com/52970365/236109946-96fdda24-44fe-4e20-a9a8-458cc57cf026.png';
-    FirebaseAuth auth = FirebaseAuth.instance;
 
-    void mostrarModal(BuildContext context, String image) {
+    void mostrarModal(BuildContext context) {
       showDialog(
         context: context,
         builder: (BuildContext context) {
-          return EditAvatarModal(
-            profileImage: profileImage,
-          );
+          return EditAvatarModal();
         },
       );
     }
@@ -57,12 +53,12 @@ class _ProfileState extends State<Profile> with TickerProviderStateMixin {
                     child: ListTile(
                       leading: GestureDetector(
                         onTap: () {
-                          mostrarModal(context, profileImage);
+                          mostrarModal(context);
                         },
                         child: CircleAvatar(
                           radius: 30,
                           backgroundImage: NetworkImage(
-                            profileImage,
+                            context.watch<UploadPhotoProvider>().imageURL,
                           ),
                         ),
                       ),

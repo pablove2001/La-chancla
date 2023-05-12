@@ -6,6 +6,7 @@ import 'package:lachancla/providers/events_page_provider.dart';
 import 'package:lachancla/providers/recommended_events_provider.dart';
 import 'package:lachancla/providers/states_builder_provider.dart';
 import 'package:lachancla/providers/stepper_provider.dart';
+import 'package:lachancla/providers/upload_photo_provider.dart';
 import 'package:lachancla/providers/user_events_provider.dart';
 import 'package:lachancla/screens/events_page.dart';
 import 'package:lachancla/screens/home_page.dart';
@@ -38,8 +39,8 @@ void main() async {
         ),
         ChangeNotifierProvider(create: (_) => EventsPageProvider()),
         ChangeNotifierProvider(create: (_) => EventDetailsProvider()),
-        ChangeNotifierProvider<AddEventsProvider>(
-            create: (context) => AddEventsProvider()),
+        ChangeNotifierProvider<AddEventsProvider>(create: (context) => AddEventsProvider()),
+        ChangeNotifierProvider<UploadPhotoProvider>(create: (context) => UploadPhotoProvider()),
         ChangeNotifierProvider(create: (_) => StatesBuilderProvider()),
         ChangeNotifierProvider(
           create: (_) => StepperProvider(),
