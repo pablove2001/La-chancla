@@ -2,6 +2,7 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:lachancla/models/events_model.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class EventDetailsPage extends StatelessWidget {
   final EventsModel event;
@@ -16,6 +17,21 @@ class EventDetailsPage extends StatelessWidget {
       appBar: AppBar(
         title: Text("${event.title}"),
         actions: [
+          IconButton(
+            icon: Icon(Icons.map_outlined),
+            onPressed: () async {
+              Uri _url = Uri.parse(event.urlMaps);
+              try {
+                if (!await launchUrl(_url)) {
+                  throw Exception('Could not launch $_url');
+                }
+              } catch (e) {
+                final snackBar =
+                    SnackBar(content: Text('Error con el link de maps'));
+                ScaffoldMessenger.of(context).showSnackBar(snackBar);
+              }
+            },
+          ),
           IconButton(
             icon: Icon(Icons.favorite),
             onPressed: () {},

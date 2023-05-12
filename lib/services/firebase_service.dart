@@ -9,6 +9,7 @@ import 'package:firebase_storage/firebase_storage.dart';
 FirebaseFirestore db = FirebaseFirestore.instance;
 
 Future<List> getFilteredEventsFirebase() async {
+  if (FirebaseAuth.instance.currentUser == null) return [];
   String uid = FirebaseAuth.instance.currentUser!.uid;
   DocumentSnapshot userSnapshot = await FirebaseFirestore.instance.collection('users').doc(uid).get();
   
@@ -151,4 +152,16 @@ Future<String> subirImagenAFirebase(XFile imagen) async {
     print(e);
   }
   return 'https://avatars.githubusercontent.com/u/43918722?v=4';
+}
+
+Future<bool> actualizarFotoPerfil(String url) async {
+  String uid = FirebaseAuth.instance.currentUser!.uid;
+
+  try {
+    await FirebaseFirestore.instance.collection('users').doc(uid).update({'photoURL': url });
+    await FirebaseAuth.instance.currentUser!.updatePhotoURL(url);
+    return true;
+  } catch(e) {
+    return false;
+  }
 }
