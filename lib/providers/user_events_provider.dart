@@ -27,25 +27,29 @@ class UserEventsProvider with ChangeNotifier {
     final User? user = _auth.currentUser;
     final String? uid = user?.uid;
 
-    List eventsFirebase = await getUserEventsFirebase(uid!);
-    List<EventsModel> events = [];
-    for (var event in eventsFirebase) {
-      events.add(
-        EventsModel(
-          title: event['title'],
-          description: event['description'],
-          image: event['image'],
-          startDate: event['startDate'].toDate(),
-          endDate: event['endDate'].toDate(),
-          state_name: event['state_name'],
-          urlMaps: event['urlMaps'],
-          capacity: event['capacity'],
-          id_organizer: event['id_organizer'],
-          status: 'Sin estatus',
-        ),
-      );
+    if (uid != null) {
+      List eventsFirebase = await getUserEventsFirebase(uid);
+      List<EventsModel> events = [];
+      for (var event in eventsFirebase) {
+        events.add(
+          EventsModel(
+            title: event['title'],
+            description: event['description'],
+            image: event['image'],
+            startDate: event['startDate'].toDate(),
+            endDate: event['endDate'].toDate(),
+            state_name: event['state_name'],
+            urlMaps: event['urlMaps'],
+            capacity: event['capacity'],
+            id_organizer: event['id_organizer'],
+            status: 'Sin estatus',
+          ),
+        );
+      }
+      this._events = events;
+      notifyListeners();
+    } else {
+      print('uid is null');
     }
-    this._events = events;
-    notifyListeners();
   }
 }
