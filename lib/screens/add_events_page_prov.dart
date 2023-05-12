@@ -38,7 +38,7 @@ class AddEventsPageProv extends StatelessWidget {
                             height: 50,
                             decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(30),
-                              color: Colors.green,
+                              color: Colors.white,
                             ),
                             child: TextButton.icon(
                               onPressed: () {
@@ -156,7 +156,12 @@ class AddEventsPageProv extends StatelessWidget {
                         onPressed: () => context
                             .read<AddEventsProvider>()
                             .selectDateTime(context),
-                        child: Text('Start event date'),
+                        style: ElevatedButton.styleFrom(
+                            backgroundColor: Colors.white),
+                        child: Text(
+                          'Start event date',
+                          style: TextStyle(color: Colors.black),
+                        ),
                       ),
                     ],
                   ),
@@ -169,7 +174,12 @@ class AddEventsPageProv extends StatelessWidget {
                         onPressed: () => context
                             .read<AddEventsProvider>()
                             .endSelectDateTime(context),
-                        child: Text('End event date'),
+                        style: ElevatedButton.styleFrom(
+                            backgroundColor: Colors.white),
+                        child: Text(
+                          'End event date',
+                          style: TextStyle(color: Colors.black),
+                        ),
                       ),
                     ],
                   ),
@@ -181,10 +191,9 @@ class AddEventsPageProv extends StatelessWidget {
                     children: [
                       Container(
                         width: 150,
-                        height: 50,
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(30),
-                          color: Colors.red,
+                          color: Color(0xFFe0d8b0),
                         ),
                         child: TextButton(
                           onPressed: () {
@@ -193,16 +202,15 @@ class AddEventsPageProv extends StatelessWidget {
                           },
                           child: Text(
                             "Cancel",
-                            style: TextStyle(fontSize: 24, color: Colors.white),
+                            style: TextStyle(fontSize: 20, color: Colors.black),
                           ),
                         ),
                       ),
                       Container(
                         width: 150,
-                        height: 50,
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(30),
-                          color: Colors.blue,
+                          color: Color(0xFFe0d8b0),
                         ),
                         child: TextButton(
                           onPressed: () async {
@@ -221,7 +229,7 @@ class AddEventsPageProv extends StatelessWidget {
                           },
                           child: Text(
                             "Submit",
-                            style: TextStyle(fontSize: 24, color: Colors.white),
+                            style: TextStyle(fontSize: 20, color: Colors.black),
                           ),
                         ),
                       ),
