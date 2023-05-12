@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:lachancla/models/events_model.dart';
 
 class FavoritesCards extends StatelessWidget {
-  const FavoritesCards({super.key});
+  final EventsModel event;
+  const FavoritesCards({super.key, required this.event});
 
   @override
   Widget build(BuildContext context) {
@@ -14,11 +16,14 @@ class FavoritesCards extends StatelessWidget {
         leading: ClipRRect(
           borderRadius: BorderRadius.circular(10.0),
           child: Image.network(
-            "https://i.stack.imgur.com/Of2w5.jpg",
+            "${event.image}",
+            //"https://i.stack.imgur.com/Of2w5.jpg",
+            width: 100,
+            fit: BoxFit.fitWidth,
           ),
         ),
-        title: Text('Melbourne Cricket Stadium'),
-        subtitle: Text('Australia'),
+        title: Text(event.title),
+        subtitle: Text(event.state_name),
         trailing: MaterialButton(
           child: Icon(
             Icons.favorite,

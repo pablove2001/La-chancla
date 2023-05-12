@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_signin_button/button_list.dart';
 import 'package:flutter_signin_button/button_view.dart';
+import 'package:lachancla/providers/user_events_provider.dart';
+import 'package:lachancla/providers/user_favorites_provider.dart';
 import 'package:lachancla/screens/events_page.dart';
 import 'package:lachancla/screens/sign_up_page.dart';
 import 'package:lachancla/screens/starting_page.dart';
@@ -22,11 +24,15 @@ class LogInPage extends StatelessWidget {
     return BlocListener<AuthBloc, AuthState>(
       listener: (context, state) {
         if (state is AuthSuccessState) {
+          context.read<UserFavEventsProvider>().initProvider();
+          context.read<UserEventsProvider>().initProvider();
           Navigator.push(
             context,
             MaterialPageRoute(builder: (context) => EventsPage()),
           );
         } else if (state is AuthSuccessUserCreatedState) {
+          context.read<UserFavEventsProvider>().initProvider();
+          context.read<UserEventsProvider>().initProvider();
           Navigator.push(
             context,
             MaterialPageRoute(builder: (context) => StartingPage()),
@@ -114,6 +120,8 @@ class LogInPage extends StatelessWidget {
                       BlocProvider.of<AuthBloc>(context).add(UserPassAuthEvent(
                           email: emailController.text,
                           password: passwordController.text));
+                      context.read<UserFavEventsProvider>().initProvider();
+                      context.read<UserEventsProvider>().initProvider();
                     },
                     child: Text(
                       'Log in',

@@ -6,6 +6,7 @@ import 'package:lachancla/providers/recommended_events_provider.dart';
 import 'package:lachancla/providers/states_builder_provider.dart';
 import 'package:lachancla/providers/stepper_provider.dart';
 import 'package:lachancla/providers/user_events_provider.dart';
+import 'package:lachancla/providers/user_favorites_provider.dart';
 import 'package:lachancla/screens/events_page.dart';
 import 'package:lachancla/screens/home_page.dart';
 import 'package:lachancla/services/bloc/auth_bloc.dart';
@@ -42,6 +43,9 @@ void main() async {
         ),
         ChangeNotifierProvider<UserEventsProvider>.value(
           value: UserEventsProvider()..initProvider(),
+        ),
+        ChangeNotifierProvider<UserFavEventsProvider>.value(
+          value: UserFavEventsProvider()..initProvider(),
         ),
       ],
       child: MyApp(),

@@ -2,6 +2,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:lachancla/providers/user_events_provider.dart';
+import 'package:lachancla/providers/user_favorites_provider.dart';
 import 'package:lachancla/screens/home_page.dart';
 import 'package:lachancla/services/bloc/auth_bloc.dart';
 import 'package:lachancla/widgets/edit_avatar_modal.dart';
@@ -140,12 +141,18 @@ class _ProfileState extends State<Profile> with TickerProviderStateMixin {
                         );
                       },
                     ),
-                    ListView.builder(
-                      scrollDirection: Axis.vertical,
-                      padding: EdgeInsets.all(10),
-                      itemCount: 2,
-                      itemBuilder: (BuildContext context, int index) {
-                        return FavoritesCards();
+                    Consumer<UserFavEventsProvider>(
+                      builder: (context, provider, child) {
+                        return ListView.builder(
+                          scrollDirection: Axis.vertical,
+                          padding: EdgeInsets.all(10),
+                          itemCount: provider.getEvents.length,
+                          itemBuilder: (BuildContext context, int index) {
+                            provider.initProvider();
+                            return FavoritesCards(
+                                event: provider.getEvents[index]);
+                          },
+                        );
                       },
                     ),
                   ],

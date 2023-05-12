@@ -37,6 +37,23 @@ Future<List> getUserEventsFirebase(String uid) async {
   return userEvents;
 }
 
+Future<List> getUserFavEventsFirebase(String uid) async {
+  List userEvents = [];
+
+  CollectionReference collectionReferenceUsers = db.collection('users');
+  CollectionReference collectionReferenceEvents = db.collection('events');
+  DocumentSnapshot userRef = await collectionReferenceUsers.doc(uid).get();
+  List favorites = await userRef.get('favorite_events');
+
+  if (favorites.isNotEmpty) {
+    favorites.forEach((doc) async {
+      DocumentSnapshot event = await collectionReferenceEvents.doc(doc).get();
+      userEvents.add(event.data());
+    });
+  }
+  return userEvents;
+}
+
 Future<bool> updateUserStepper(
     List<String> gustos, String estado, BuildContext context) async {
   try {
