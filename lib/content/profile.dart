@@ -1,9 +1,11 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:lachancla/providers/user_events_provider.dart';
 import 'package:lachancla/screens/home_page.dart';
 import 'package:lachancla/services/bloc/auth_bloc.dart';
 import 'package:lachancla/widgets/edit_avatar_modal.dart';
+import 'package:provider/provider.dart';
 import '../widgets/favorites_cards.dart';
 import '../widgets/my_events_cards.dart';
 
@@ -124,12 +126,18 @@ class _ProfileState extends State<Profile> with TickerProviderStateMixin {
                 child: TabBarView(
                   controller: _tabController,
                   children: [
-                    ListView.builder(
-                      scrollDirection: Axis.vertical,
-                      padding: EdgeInsets.all(10),
-                      itemCount: 3,
-                      itemBuilder: (BuildContext context, int index) {
-                        return MyEventsCards();
+                    Consumer<UserEventsProvider>(
+                      builder: (context, provider, child) {
+                        return ListView.builder(
+                          scrollDirection: Axis.vertical,
+                          padding: EdgeInsets.all(10),
+                          itemCount: provider.getEvents.length,
+                          itemBuilder: (BuildContext context, int index) {
+                            provider.initProvider();
+                            return MyEventsCards(
+                                event: provider.getEvents[index]);
+                          },
+                        );
                       },
                     ),
                     ListView.builder(
