@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:lachancla/screens/update_events_page.dart';
+import '../models/events_model.dart';
 
 class MyEventsCards extends StatelessWidget {
-  const MyEventsCards({super.key});
+  final EventsModel event;
+  const MyEventsCards({super.key, required this.event});
 
   @override
   Widget build(BuildContext context) {
@@ -17,11 +19,14 @@ class MyEventsCards extends StatelessWidget {
             leading: ClipRRect(
               borderRadius: BorderRadius.circular(10.0),
               child: Image.network(
-                "https://knightsbanner.com/wp-content/uploads/2018/02/The_Greatest_Showman-copy-900x400.png",
+                "${event.image}",
+                //"https://knightsbanner.com/wp-content/uploads/2018/02/The_Greatest_Showman-copy-900x400.png",
+                width: 100,
+                fit: BoxFit.fitWidth,
               ),
             ),
-            title: Text('Melbourne Cricket Stadium'),
-            subtitle: Text('Australia'),
+            title: Text(event.title),
+            subtitle: Text(event.state_name),
             trailing: PopupMenuButton(
               itemBuilder: (context) => [
                 PopupMenuItem(
