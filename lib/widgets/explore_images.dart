@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
-import 'package:lachancla/providers/recommended_events_provider.dart';
+import 'package:lachancla/providers/all_events_provider.dart';
 import 'package:provider/provider.dart';
 import '../screens/event_details_page.dart';
 
@@ -22,16 +22,16 @@ class ExploreImages extends StatelessWidget {
             QuiltedGridTile(1, 1),
           ],
         ),
-        itemCount: context.watch<RecommendedEventsProvider>().getEvents.length,
+        itemCount: context.watch<AllEventsProvider>().getEvents.length,
         itemBuilder: (BuildContext context, int index) {
           return GestureDetector(
             onTap: () {
-              context.read<RecommendedEventsProvider>().initProvider();
+              context.read<AllEventsProvider>().initProvider();
               Navigator.of(context).push(
                 MaterialPageRoute(
                   builder: (context) => EventDetailsPage(
                     event: context
-                        .read<RecommendedEventsProvider>()
+                        .read<AllEventsProvider>()
                         .getEvents[index],
                   ),
                 ),
@@ -45,7 +45,7 @@ class ExploreImages extends StatelessWidget {
               ),
               child: Image.network(
                 context
-                    .read<RecommendedEventsProvider>()
+                    .read<AllEventsProvider>()
                     .getEvents[index]
                     .image,
                 fit: BoxFit.cover,
