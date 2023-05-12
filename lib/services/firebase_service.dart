@@ -21,6 +21,22 @@ Future<List> getEventsFirebase() async {
   return events;
 }
 
+Future<List> getUserEventsFirebase(String uid) async {
+  List userEvents = [];
+
+  CollectionReference collectionReferenceEvents = db.collection('events');
+  // Filtrar los registros donde el campo "id_organizer" sea igual a tu "uid"
+  QuerySnapshot queryEvents = await collectionReferenceEvents
+      .where('id_organizer', isEqualTo: uid)
+      .get();
+
+  queryEvents.docs.forEach((doc) {
+    userEvents.add(doc.data());
+  });
+
+  return userEvents;
+}
+
 Future<bool> updateUserStepper(
     List<String> gustos, String estado, BuildContext context) async {
   try {
