@@ -85,7 +85,7 @@ class UserAuthRepository {
     });
   }
 
-  Future<void> signInWithGoogle() async {
+  Future<String> signInWithGoogle() async {
     final googleUser = await _googleSignIn.signIn();
     final googleAuth = await googleUser!.authentication;
     print(">> User name: ${googleUser.displayName}");
@@ -105,11 +105,13 @@ class UserAuthRepository {
         .get();
 
     if (snapshot.size == 0) {
-      await FirebaseFirestore.instance.collection('users').doc(uid).set({
-        'name': _googleSignIn.currentUser!.displayName,
-        'email': _googleSignIn.currentUser!.email,
-        'photoURL': _googleSignIn.currentUser!.photoUrl,
-      });
+      await FirebaseFirestore.instance.collection('users').doc(uid).set(
+        {
+          'name': _googleSignIn.currentUser!.displayName,
+          'email': _googleSignIn.currentUser!.email,
+          'photoURL': _googleSignIn.currentUser!.photoUrl,
+        },
+      );
 
       await FirebaseFirestore.instance.collection('users').doc(uid).update(
         {
@@ -121,6 +123,9 @@ class UserAuthRepository {
               'https://user-images.githubusercontent.com/52970365/236108954-7cdd5f03-6539-4a32-82ba-afa96230d756.png'
         },
       );
+
+      return "success-create-user";
     }
+    return "success";
   }
 }

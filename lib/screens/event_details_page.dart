@@ -49,60 +49,141 @@ class EventDetailsPage extends StatelessWidget {
                   children: [
                     Column(
                       children: [
-                        Text(
-                          'Start Date:',
-                          style: TextStyle(fontSize: 24),
+                        Card(
+                          clipBehavior: Clip.antiAlias,
+                          child: Padding(
+                            padding: EdgeInsets.all(8.0),
+                            child: Column(
+                              children: [
+                                Text(
+                                  'Start Date',
+                                  style: TextStyle(fontSize: 24),
+                                ),
+                                SizedBox(
+                                  height: 10,
+                                ),
+                                Text("${formatter.format(event.startDate)}"),
+                              ],
+                            ),
+                          ),
                         ),
-                        Text("${formatter.format(event.startDate)}"),
                       ],
                     ),
                     Column(
                       children: [
-                        Text(
-                          'End Date:',
-                          style: TextStyle(fontSize: 24),
+                        Card(
+                          clipBehavior: Clip.antiAlias,
+                          child: Padding(
+                            padding: EdgeInsets.all(8.0),
+                            child: Column(
+                              children: [
+                                Text(
+                                  'End Date',
+                                  style: TextStyle(fontSize: 24),
+                                ),
+                                SizedBox(
+                                  height: 10,
+                                ),
+                                Text("${formatter.format(event.endDate)}"),
+                              ],
+                            ),
+                          ),
                         ),
-                        Text("${formatter.format(event.endDate)}"),
                       ],
                     ),
                   ],
                 ),
                 SizedBox(height: 25),
-                Text(
-                  'Description:',
-                  style: TextStyle(fontSize: 24),
+                Center(
+                  child: Card(
+                    clipBehavior: Clip.antiAlias,
+                    child: Padding(
+                      padding: EdgeInsets.all(8.0),
+                      child: Column(
+                        children: [
+                          Text(
+                            'Description',
+                            style: TextStyle(fontSize: 24),
+                          ),
+                          SizedBox(
+                            height: 10,
+                          ),
+                          Text(event.description),
+                        ],
+                      ),
+                    ),
+                  ),
                 ),
-                Text(event.description),
                 SizedBox(height: 25),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: [
                     Column(
                       children: [
-                        Text(
-                          'Capacity:',
-                          style: TextStyle(fontSize: 24),
+                        Card(
+                          clipBehavior: Clip.antiAlias,
+                          child: Padding(
+                            padding: EdgeInsets.all(8.0),
+                            child: Column(
+                              children: [
+                                Text(
+                                  'Capacity',
+                                  style: TextStyle(fontSize: 24),
+                                ),
+                                SizedBox(
+                                  height: 10,
+                                ),
+                                Text("${event.capacity}"),
+                              ],
+                            ),
+                          ),
                         ),
-                        Text("${event.capacity}"),
                       ],
                     ),
                     Column(
                       children: [
-                        Text(
-                          'Place:',
-                          style: TextStyle(fontSize: 24),
+                        Card(
+                          clipBehavior: Clip.antiAlias,
+                          child: Padding(
+                            padding: EdgeInsets.all(8.0),
+                            child: Column(
+                              children: [
+                                Text(
+                                  'Place',
+                                  style: TextStyle(fontSize: 24),
+                                ),
+                                SizedBox(
+                                  height: 10,
+                                ),
+                                Text(event.urlMaps.substring(0, 16)),
+                              ],
+                            ),
+                          ),
                         ),
-                        Text(event.urlMaps.substring(0, 16)),
                       ],
                     ),
                   ],
                 ),
                 SizedBox(height: 25),
-                Text(
-                  'Estado:',
-                  style: TextStyle(fontSize: 24),
+                Center(
+                  child: Card(
+                    child: Padding(
+                      padding: EdgeInsets.all(8.0),
+                      child: Column(
+                        children: [
+                          Text(
+                            'Estado',
+                            style: TextStyle(fontSize: 24),
+                          ),
+                          SizedBox(
+                            height: 10,
+                          ),
+                          Text("${event.state_name}"),
+                        ],
+                      ),
+                    ),
+                  ),
                 ),
-                Text("${event.state_name}"),
               ],
             ),
           )
