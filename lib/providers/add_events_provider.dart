@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:lachancla/providers/all_events_provider.dart';
 import 'package:lachancla/providers/recommended_events_provider.dart';
+import 'package:lachancla/providers/user_events_provider.dart';
 import 'package:lachancla/screens/events_page.dart';
 import 'package:lachancla/services/firebase_service.dart';
 import 'package:provider/provider.dart';
@@ -174,6 +175,7 @@ class AddEventsProvider with ChangeNotifier {
 
       await context.read<RecommendedEventsProvider>().initProvider();
       await context.read<AllEventsProvider>().initProvider();
+      await context.read<UserEventsProvider>().initProvider();
 
       notifyListeners();
 
