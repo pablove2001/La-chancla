@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:lachancla/providers/states_builder_provider.dart';
+import 'package:lachancla/providers/all_events_provider.dart';
+import 'package:lachancla/providers/recommended_events_provider.dart';
+import 'package:lachancla/providers/user_events_provider.dart';
 import 'package:lachancla/screens/events_page.dart';
 import 'package:lachancla/services/firebase_service.dart';
+import 'package:provider/provider.dart';
 
 class AddEventsProvider with ChangeNotifier {
   TextEditingController titleController = TextEditingController();
@@ -17,7 +20,12 @@ class AddEventsProvider with ChangeNotifier {
   TimeOfDay endTime = TimeOfDay.fromDateTime(DateTime.now());
 
   Future<void> getImage(ImageSource media) async {
-    var img = await picker.pickImage(source: media);
+    var img = await picker.pickImage(
+      source: ImageSource.camera,
+      maxHeight: 150,
+      maxWidth: 280,
+      imageQuality: 85,
+    );
     if (img == null) return;
     image = img;
     notifyListeners();
@@ -158,13 +166,18 @@ class AddEventsProvider with ChangeNotifier {
           estado,
           this.titleController.text,
           this.urlMapsController.text);
-      notifyListeners();
       ScaffoldMessenger.of(context)
           .showSnackBar(SnackBar(content: Text('Evento creado')));
       Navigator.push(
         context,
         MaterialPageRoute(builder: (context) => EventsPage()),
       );
+
+      await context.read<RecommendedEventsProvider>().initProvider();
+      await context.read<AllEventsProvider>().initProvider();
+      await context.read<UserEventsProvider>().initProvider();
+
+      notifyListeners();
 
       return nice;
     } catch (e) {}

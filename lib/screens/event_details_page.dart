@@ -2,9 +2,7 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:lachancla/models/events_model.dart';
-import 'package:lachancla/providers/event_details_provider.dart';
-import 'package:lachancla/widgets/image_coursel_slider.dart';
-import 'package:provider/provider.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class EventDetailsPage extends StatelessWidget {
   final EventsModel event;
@@ -20,8 +18,19 @@ class EventDetailsPage extends StatelessWidget {
         title: Text("${event.title}"),
         actions: [
           IconButton(
-            icon: Icon(Icons.favorite),
-            onPressed: () {},
+            icon: Icon(Icons.map_outlined),
+            onPressed: () async {
+              try {
+                Uri _url = Uri.parse(event.urlMaps);
+                if (!await launchUrl(_url)) {
+                  throw Exception('Could not launch $_url');
+                }
+              } catch (e) {
+                final snackBar =
+                    SnackBar(content: Text('Error con el link de maps'));
+                ScaffoldMessenger.of(context).showSnackBar(snackBar);
+              }
+            },
           ),
         ],
       ),
@@ -52,84 +61,121 @@ class EventDetailsPage extends StatelessWidget {
                   children: [
                     Column(
                       children: [
-                        Text(
-                          'Start Date:',
-                          style: TextStyle(fontSize: 24),
+                        Card(
+                          clipBehavior: Clip.antiAlias,
+                          child: Padding(
+                            padding: EdgeInsets.all(8.0),
+                            child: Column(
+                              children: [
+                                Text(
+                                  'Start Date',
+                                  style: TextStyle(fontSize: 24),
+                                ),
+                                SizedBox(
+                                  height: 10,
+                                ),
+                                Text("${formatter.format(event.startDate)}"),
+                              ],
+                            ),
+                          ),
                         ),
-                        Text("${formatter.format(event.startDate)}"),
                       ],
                     ),
                     Column(
                       children: [
-                        Text(
-                          'End Date:',
-                          style: TextStyle(fontSize: 24),
+                        Card(
+                          clipBehavior: Clip.antiAlias,
+                          child: Padding(
+                            padding: EdgeInsets.all(8.0),
+                            child: Column(
+                              children: [
+                                Text(
+                                  'End Date',
+                                  style: TextStyle(fontSize: 24),
+                                ),
+                                SizedBox(
+                                  height: 10,
+                                ),
+                                Text("${formatter.format(event.endDate)}"),
+                              ],
+                            ),
+                          ),
                         ),
-                        Text("${formatter.format(event.endDate)}"),
                       ],
                     ),
                   ],
                 ),
                 SizedBox(height: 25),
-                Text(
-                  'Description:',
-                  style: TextStyle(fontSize: 24),
+                Center(
+                  child: Card(
+                    clipBehavior: Clip.antiAlias,
+                    child: Padding(
+                      padding: EdgeInsets.all(8.0),
+                      child: Column(
+                        children: [
+                          Text(
+                            'Description',
+                            style: TextStyle(fontSize: 24),
+                          ),
+                          SizedBox(
+                            height: 10,
+                          ),
+                          Text(event.description),
+                        ],
+                      ),
+                    ),
+                  ),
                 ),
-                Text(event.description),
                 SizedBox(height: 25),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: [
                     Column(
                       children: [
-                        Text(
-                          'Price:',
-                          style: TextStyle(fontSize: 24),
+                        Card(
+                          clipBehavior: Clip.antiAlias,
+                          child: Padding(
+                            padding: EdgeInsets.all(8.0),
+                            child: Column(
+                              children: [
+                                Text(
+                                  'Capacity',
+                                  style: TextStyle(fontSize: 24),
+                                ),
+                                SizedBox(
+                                  height: 10,
+                                ),
+                                Text("${event.capacity}"),
+                              ],
+                            ),
+                          ),
                         ),
-                        Text("\$ ${event.price.toStringAsFixed(2)}"),
                       ],
                     ),
                     Column(
                       children: [
-                        Text(
-                          'Capacity:',
-                          style: TextStyle(fontSize: 24),
+                        Card(
+                          clipBehavior: Clip.antiAlias,
+                          child: Padding(
+                            padding: EdgeInsets.all(8.0),
+                            child: Column(
+                              children: [
+                                Text(
+                                  'Estado',
+                                  style: TextStyle(fontSize: 24),
+                                ),
+                                SizedBox(
+                                  height: 10,
+                                ),
+                                Text("${event.state_name}"),
+                              ],
+                            ),
+                          ),
                         ),
-                        Text("${event.capacity}"),
                       ],
                     ),
                   ],
                 ),
-                SizedBox(height: 25),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceAround,
-                  children: [
-                    Column(
-                      children: [
-                        Text(
-                          'Place:',
-                          style: TextStyle(fontSize: 24),
-                        ),
-                        Text(event.urlMaps),
-                      ],
-                    ),
-                    Column(
-                      children: [
-                        Text(
-                          'Age:',
-                          style: TextStyle(fontSize: 24),
-                        ),
-                        Text("From ${event.minimumAge} to ${event.maximumAge}"),
-                      ],
-                    ),
-                  ],
-                ),
-                SizedBox(height: 25),
-                Text(
-                  'Estado:',
-                  style: TextStyle(fontSize: 24),
-                ),
-                Text("${event.state_name}"),
               ],
             ),
           )

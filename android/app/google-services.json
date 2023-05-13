@@ -14,6 +14,38 @@
       },
       "oauth_client": [
         {
+          "client_id": "332914717990-16v92c33ih7pr1tan4rj4pubjdpld010.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "iteso.mx.lachancla",
+            "certificate_hash": "57c401f5d4b0ef89e28875dafeb6841e7fc03cca"
+          }
+        },
+        {
+          "client_id": "332914717990-h11hlinbgtr3odoojufgseav5o3k45qu.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "iteso.mx.lachancla",
+            "certificate_hash": "70b055aa235ff9f865d5cc9e7377931b79655b85"
+          }
+        },
+        {
+          "client_id": "332914717990-muodtuddj9p0euif1q6aa8uo9qi7a48g.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "iteso.mx.lachancla",
+            "certificate_hash": "f00beae2e4790f17bca0b91987487dc943829733"
+          }
+        },
+        {
+          "client_id": "332914717990-qsk5m252v6as9b280t6l9d430v8p8ec3.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "iteso.mx.lachancla",
+            "certificate_hash": "0332f67dab74fff4f158b82ba02c1605d35d335e"
+          }
+        },
+        {
           "client_id": "332914717990-3sri5kc7udj70dqene57g084pm61tghg.apps.googleusercontent.com",
           "client_type": 3
         }
@@ -29,6 +61,13 @@
             {
               "client_id": "332914717990-3sri5kc7udj70dqene57g084pm61tghg.apps.googleusercontent.com",
               "client_type": 3
+            },
+            {
+              "client_id": "332914717990-3bpgbqd4ljoqlrprh7f873jdpos4dfjm.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "iteso.mx.lachancla"
+              }
             }
           ]
         }

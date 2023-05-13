@@ -5,20 +5,77 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:firebase_storage/firebase_storage.dart';
+import 'package:lachancla/models/events_model.dart';
 
 FirebaseFirestore db = FirebaseFirestore.instance;
 
-Future<List> getEventsFirebase() async {
-  List events = [];
-  CollectionReference collectionReferenceEvents = db.collection('events');
+Future<List> getFilteredEventsFirebase() async {
+  if (FirebaseAuth.instance.currentUser == null) return [];
+  String uid = FirebaseAuth.instance.currentUser!.uid;
+  DocumentSnapshot userSnapshot = await FirebaseFirestore.instance.collection('users').doc(uid).get();
+  
+  Map<String, dynamic>? data = userSnapshot.data() as Map<String, dynamic>?;
 
-  QuerySnapshot queryEvents = await collectionReferenceEvents.get();
+  List events = [];
+
+  QuerySnapshot queryEvents = await FirebaseFirestore.instance.collection('events').where('state_name', isEqualTo: data!['state_name']).get();
 
   queryEvents.docs.forEach((doc) {
     events.add(doc.data());
   });
 
   return events;
+}
+
+Future<List> getAllEventsFirebase() async {
+  List events = [];
+
+  QuerySnapshot queryEvents = await FirebaseFirestore.instance.collection('events').get();
+
+  queryEvents.docs.forEach((doc) {
+    events.add(doc.data());
+  });
+
+  return events;
+}
+
+Future<List> getUserEventsFirebase(String uid) async {
+  List userEvents = [];
+
+  CollectionReference collectionReferenceEvents = db.collection('events');
+  // Filtrar los registros donde el campo "id_organizer" sea igual a tu "uid"
+  QuerySnapshot queryEvents = await collectionReferenceEvents
+      .where('id_organizer', isEqualTo: uid)
+      .get();
+
+  queryEvents.docs.forEach((doc) {
+    userEvents.add(doc.data());
+  });
+
+  return userEvents;
+}
+
+Future<bool> borrarEventoFirebase(EventsModel event) async {
+  try {
+    await FirebaseFirestore.instance
+      .collection('events')
+      .where('title', isEqualTo: event.title)
+      .where('capacity', isEqualTo: event.capacity)
+      .where('description', isEqualTo: event.description)
+      .where('id_organizer', isEqualTo: event.id_organizer)
+      .where('image', isEqualTo: event.image)
+      .where('state_name', isEqualTo: event.state_name)
+      .where('urlMaps', isEqualTo: event.urlMaps)
+      .get()
+      .then((querySnapshot) {
+        querySnapshot.docs.forEach((document) {
+          document.reference.delete();
+        });
+      });
+    return true;
+  } catch (e) {
+    return false;
+  }
 }
 
 Future<bool> updateUserStepper(
@@ -36,6 +93,8 @@ Future<bool> updateUserStepper(
     // mostrar ScaffoldMessenger
     ScaffoldMessenger.of(context)
         .showSnackBar(SnackBar(content: Text('Configuraciones guardadas')));
+
+    await getFilteredEventsFirebase();
 
     return true;
   } on FirebaseAuthException catch (e) {
@@ -117,4 +176,16 @@ Future<String> subirImagenAFirebase(XFile imagen) async {
     print(e);
   }
   return 'https://avatars.githubusercontent.com/u/43918722?v=4';
+}
+
+Future<bool> actualizarFotoPerfil(String url) async {
+  String uid = FirebaseAuth.instance.currentUser!.uid;
+
+  try {
+    await FirebaseFirestore.instance.collection('users').doc(uid).update({'photoURL': url });
+    await FirebaseAuth.instance.currentUser!.updatePhotoURL(url);
+    return true;
+  } catch(e) {
+    return false;
+  }
 }
