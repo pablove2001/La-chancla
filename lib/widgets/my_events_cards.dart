@@ -1,8 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:lachancla/providers/user_events_provider.dart';
+import 'package:lachancla/screens/event_details_page.dart';
 import 'package:lachancla/screens/update_events_page.dart';
+import 'package:provider/provider.dart';
+import '../models/events_model.dart';
 
 class MyEventsCards extends StatelessWidget {
-  const MyEventsCards({super.key});
+  final EventsModel event;
+  const MyEventsCards({super.key, required this.event});
 
   @override
   Widget build(BuildContext context) {
@@ -17,21 +22,24 @@ class MyEventsCards extends StatelessWidget {
             leading: ClipRRect(
               borderRadius: BorderRadius.circular(10.0),
               child: Image.network(
-                "https://knightsbanner.com/wp-content/uploads/2018/02/The_Greatest_Showman-copy-900x400.png",
+                "${event.image}",
+                //"https://knightsbanner.com/wp-content/uploads/2018/02/The_Greatest_Showman-copy-900x400.png",
+                width: 100,
+                fit: BoxFit.fitWidth,
               ),
             ),
-            title: Text('Melbourne Cricket Stadium'),
-            subtitle: Text('Australia'),
+            title: Text(event.title),
+            subtitle: Text(event.state_name),
             trailing: PopupMenuButton(
               itemBuilder: (context) => [
                 PopupMenuItem(
                   child: MaterialButton(
                     minWidth: double.infinity,
-                    child: Icon(Icons.edit),
+                    child: Icon(Icons.remove_red_eye_outlined),
                     onPressed: () {
                       Navigator.of(context).push(
                         MaterialPageRoute(
-                          builder: (context) => UpdateEventsPage(),
+                          builder: (context) => EventDetailsPage(event: this.event),
                         ),
                       );
                     },
@@ -44,7 +52,10 @@ class MyEventsCards extends StatelessWidget {
                     child: Icon(
                       Icons.delete,
                     ),
-                    onPressed: () => _dialogBuilder(context),
+                    onPressed: (){
+                      Navigator.of(context).pop();
+                      _dialogBuilder(context, this.event);
+                    },
                   ),
                   value: 2,
                 )
@@ -57,7 +68,7 @@ class MyEventsCards extends StatelessWidget {
   }
 }
 
-Future<void> _dialogBuilder(BuildContext context) {
+Future<void> _dialogBuilder(BuildContext context, EventsModel event) {
   return showDialog<void>(
     context: context,
     builder: (BuildContext context) {
@@ -82,6 +93,7 @@ Future<void> _dialogBuilder(BuildContext context) {
               style: TextStyle(color: Colors.red),
             ),
             onPressed: () {
+              context.read<UserEventsProvider>().borrarEvento(event);
               Navigator.of(context).pop();
             },
           ),

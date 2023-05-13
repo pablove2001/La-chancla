@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:lachancla/screens/starting_page.dart';
 import 'package:provider/provider.dart';
 import 'package:lachancla/providers/recommended_events_provider.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import '../widgets/easter_egg.dart';
 import '../widgets/recommended_cards.dart';
 
@@ -17,33 +17,46 @@ class RecommendedEvents extends StatelessWidget {
           children: <Widget>[
             Stack(
               children: [
-                Column(
-                  children: [
-                    Text(
-                      "Hola ${FirebaseAuth.instance.currentUser?.displayName ?? 'Sin Nombre'}",
-                      style: TextStyle(
-                          fontFamily: 'Lobster',
-                          fontSize: 36,
-                          color: Colors.white),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.only(left: 20),
-                      child: Text(
-                        "Encontré estos eventos que podrían interesarte!",
+                Padding(
+                  padding: const EdgeInsets.only(left: 15, bottom: 10),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text(
+                        "Eventos para ti!",
                         style: TextStyle(
-                          fontFamily: 'Lobster',
-                          fontSize: 15,
-                        ),
+                            fontFamily: 'Lobster',
+                            fontSize: 36,
+                            color: Colors.white),
                       ),
-                    ),
-                    SizedBox(
-                      height: 15,
-                    )
-                  ],
+                      Row(
+                        children: [
+                          IconButton(
+                            onPressed: () {
+                              context
+                                  .read<RecommendedEventsProvider>()
+                                  .initProvider();
+                            },
+                            icon: Icon(Icons.replay),
+                          ),
+                          IconButton(
+                            onPressed: () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => StartingPage()),
+                              );
+                            },
+                            icon: Icon(Icons.more_vert),
+                          ),
+                        ],
+                      ),
+                    ],
+                  ),
                 ),
                 Positioned(
                   top: 0,
-                  right: 0,
+                  left: 0,
                   child: InkWell(
                     splashColor: Colors.transparent,
                     highlightColor: Colors.transparent,

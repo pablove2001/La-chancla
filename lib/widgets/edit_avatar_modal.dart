@@ -1,8 +1,11 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:lachancla/providers/upload_photo_provider.dart';
+import 'package:provider/provider.dart';
 
 class EditAvatarModal extends StatelessWidget {
-  const EditAvatarModal({required this.profileImage});
-  final String profileImage;
+  const EditAvatarModal();
+
   @override
   Widget build(BuildContext context) {
     return AlertDialog(
@@ -11,7 +14,7 @@ class EditAvatarModal extends StatelessWidget {
         mainAxisSize: MainAxisSize.min,
         children: [
           CircleAvatar(
-            backgroundImage: NetworkImage(profileImage),
+            backgroundImage: NetworkImage(context.watch<UploadPhotoProvider>().nuevaImagen),
             radius: 48,
           ),
           SizedBox(height: 16),
@@ -22,7 +25,7 @@ class EditAvatarModal extends StatelessWidget {
               IconButton(
                 icon: Icon(Icons.edit),
                 onPressed: () {
-                  // Lógica para editar la imagen aquí
+                  context.read<UploadPhotoProvider>().myAlert(context);
                 },
               ),
               SizedBox(width: 8),
@@ -35,13 +38,14 @@ class EditAvatarModal extends StatelessWidget {
         TextButton(
           child: Text('Cancel'),
           onPressed: () {
+            context.read<UploadPhotoProvider>().cancelar();
             Navigator.of(context).pop();
           },
         ),
         TextButton(
           child: Text('Save'),
           onPressed: () {
-            // Lógica para guardar la imagen aquí
+            context.read<UploadPhotoProvider>().save(context);
           },
         ),
       ],
